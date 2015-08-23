@@ -11,13 +11,11 @@
         public MeetyChatDbContext()
          : base("MeetyChat")
         {
-            Database.SetInitializer(
-                new MigrateDatabaseToLatestVersion
-                    <MeetyChatDbContext, Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MeetyChatDbContext, Configuration>());
         }
 
-        public virtual IDbSet<Message> Messages { get; set; }
-        public virtual IDbSet<Room> Rooms { get; set; }
+        public IDbSet<Message> Messages { get; set; }
+        public IDbSet<Room> Rooms { get; set; }
 
         public new IDbSet<T> Set<T>() where T : class
         {

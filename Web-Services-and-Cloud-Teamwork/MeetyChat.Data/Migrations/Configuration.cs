@@ -1,19 +1,17 @@
 namespace MeetyChat.Data.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
+    using Data;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<MeetyChat.Data.MeetyChatDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<MeetyChatDbContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
+            this.AutomaticMigrationsEnabled = true;
+            this.AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(MeetyChat.Data.MeetyChatDbContext context)
+        protected override void Seed(MeetyChatDbContext context)
         {
         }
     }

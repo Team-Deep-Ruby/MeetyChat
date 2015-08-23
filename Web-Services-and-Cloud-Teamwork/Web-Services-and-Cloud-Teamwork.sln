@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetyChat.Models", "MeetyCh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetyChat.Data", "MeetyChat.Data\MeetyChat.Data.csproj", "{80479633-324A-47E9-87A1-037B78804269}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetyChat.Services", "MeetyChat.Services\MeetyChat.Services.csproj", "{24E0BCB2-7E4E-4868-B077-76EF443265BB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetyChat.Services", "MeetyChat.Services\MeetyChat.Services.csproj", "{3A440A3A-4157-4050-AAA4-284EFAAA21DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{80479633-324A-47E9-87A1-037B78804269}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80479633-324A-47E9-87A1-037B78804269}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80479633-324A-47E9-87A1-037B78804269}.Release|Any CPU.Build.0 = Release|Any CPU
-		{24E0BCB2-7E4E-4868-B077-76EF443265BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{24E0BCB2-7E4E-4868-B077-76EF443265BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{24E0BCB2-7E4E-4868-B077-76EF443265BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{24E0BCB2-7E4E-4868-B077-76EF443265BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A440A3A-4157-4050-AAA4-284EFAAA21DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A440A3A-4157-4050-AAA4-284EFAAA21DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A440A3A-4157-4050-AAA4-284EFAAA21DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A440A3A-4157-4050-AAA4-284EFAAA21DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -22,7 +22,7 @@
             return base.Set<T>();
         }
 
-        public static IMeetyChatDbContext Create()
+        public static MeetyChatDbContext Create()
         {
             return new MeetyChatDbContext();
         }

@@ -1,11 +1,10 @@
 ﻿namespace MeetyChat.Data.Interfaces
 {
-    using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using Models;
 
-    public interface IMeetyChatDbContext : IDisposable
+    public interface IMeetyChatDbContext
     {
         IDbSet<Message> Messages { get; set; }
         IDbSet<Room> Rooms { get; set; }

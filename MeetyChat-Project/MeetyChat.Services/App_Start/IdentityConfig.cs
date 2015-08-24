@@ -1,4 +1,4 @@
-﻿namespace TicTacToe.Web
+﻿namespace MeetyChat.Services
 {
     using MeetyChat.Data.Data;
     using MeetyChat.Models;

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace TicTacToe.Web.Models
+namespace MeetyChat.Services.Models
 {
     // Models used as parameters to AccountController actions.
 
@@ -34,6 +34,10 @@ namespace TicTacToe.Web.Models
 
     public class RegisterBindingModel
     {
+        [Required]
+        [MinLength(4)]
+        public string Username { get; set; }
+
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }

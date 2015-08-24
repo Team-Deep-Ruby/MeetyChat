@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TicTacToe.Web</RootNamespace>
-    <AssemblyName>TicTacToe.Web</AssemblyName>
+    <RootNamespace>MeetyChat.Services</RootNamespace>
+    <AssemblyName>MeetyChat.Services</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -221,7 +221,6 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -290,9 +289,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -301,16 +298,9 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\MeetyChat.Data\MeetyChat.Data.csproj">
       <Project>{7a223a12-7e60-4aae-bf73-6a7ce9ab7945}</Project>
       <Name>MeetyChat.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TicTacToe.GameLogic\TicTacToe.GameLogic.csproj">
-      <Project>{7cf6b1c2-e1d4-4db1-85fa-d1fe9c42a46e}</Project>
-      <Name>TicTacToe.GameLogic</Name>
     </ProjectReference>
     <ProjectReference Include="..\MeetyChat.Models\MeetyChat.Models.csproj">
       <Project>{64a3c81a-b05d-45f9-a8a1-871d246ecfa0}</Project>

@@ -7,8 +7,8 @@
     <ProjectGuid>{7A223A12-7E60-4AAE-BF73-6A7CE9AB7945}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TicTacToe.Data</RootNamespace>
-    <AssemblyName>TicTacToe.Data</AssemblyName>
+    <RootNamespace>MeetyChat.Data</RootNamespace>
+    <AssemblyName>MeetyChat.Data</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>

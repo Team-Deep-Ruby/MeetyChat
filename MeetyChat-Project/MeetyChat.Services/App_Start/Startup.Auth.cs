@@ -1,4 +1,4 @@
-﻿namespace TicTacToe.Web
+﻿namespace MeetyChat.Services
 {
     using System;
     using MeetyChat.Data.Data;
@@ -8,6 +8,7 @@
     using Microsoft.Owin.Security.OAuth;
     using Owin;
     using Providers;
+    using MeetyChat.Services;
 
     public partial class Startup
     {

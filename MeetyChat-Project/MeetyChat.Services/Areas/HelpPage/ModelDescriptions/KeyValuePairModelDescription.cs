@@ -1,4 +1,4 @@
-namespace TicTacToe.Web.Areas.HelpPage.ModelDescriptions
+namespace MeetyChat.Services.Areas.HelpPage.ModelDescriptions
 {
     public class KeyValuePairModelDescription : ModelDescription
     {

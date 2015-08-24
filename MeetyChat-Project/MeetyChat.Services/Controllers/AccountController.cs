@@ -1,4 +1,4 @@
-﻿namespace TicTacToe.Web.Controllers
+﻿namespace MeetyChat.Services.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -9,15 +9,17 @@
     using System.Web;
     using System.Web.Http;
     using MeetyChat.Models;
+    using MeetyChat.Services;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
     using Microsoft.Owin.Security.Cookies;
     using Microsoft.Owin.Security.OAuth;
-    using Models;
     using Providers;
-    using Results;
+    using MeetyChat.Services;
+    using MeetyChat.Services.Models;
+    using MeetyChat.Services.Results;
 
     [Authorize]
     [RoutePrefix("api/Account")]
@@ -330,7 +332,7 @@
 
             var user = new ApplicationUser()
             {
-                UserName = model.Email,
+                UserName = model.Username,
                 Email = model.Email
             };
 

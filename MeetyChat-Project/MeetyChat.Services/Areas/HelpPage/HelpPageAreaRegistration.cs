@@ -1,8 +1,10 @@
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace TicTacToe.Web.Areas.HelpPage
+namespace MeetyChat.Services.Areas.HelpPage
 {
+    using App_Start;
+
     public class HelpPageAreaRegistration : AreaRegistration
     {
         public override string AreaName

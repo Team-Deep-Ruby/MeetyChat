@@ -1,9 +1,9 @@
-﻿using Microsoft.Owin;
-using TicTacToe.Web;
+﻿using MeetyChat.Services;
+using Microsoft.Owin;
 
 [assembly: OwinStartup(typeof(Startup))]
 
-namespace TicTacToe.Web
+namespace MeetyChat.Services
 {
     using System.Reflection;
     using System.Web.Http;
@@ -17,6 +17,7 @@ namespace TicTacToe.Web
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            return;
             app.UseNinjectMiddleware(CreateKernel).UseNinjectWebApi(GlobalConfiguration.Configuration);
         }
 
@@ -30,9 +31,9 @@ namespace TicTacToe.Web
 
         private static void RegisterMappings(StandardKernel kernel)
         {
-            // kernel.Bind<ITicTacToeData>().To<TicTacToeData>()
+            // kernel.Bind<IMeetyChatData>().To<MeetyChatData>()
             //     .WithConstructorArgument("context",
-            //         c => new TicTacToeDbContext());
+            //         c => new MeetyChatDbContext());
             // 
             // kernel.Bind<IGameResultValidator>().To<GameResultValidator>();
             // 

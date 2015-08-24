@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TicTacToe.Web.Models
+namespace MeetyChat.Services.Models
 {
     // Models returned by AccountController actions.
 

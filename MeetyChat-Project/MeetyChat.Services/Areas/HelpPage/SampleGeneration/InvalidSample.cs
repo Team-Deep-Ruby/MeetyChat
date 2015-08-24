@@ -1,7 +1,7 @@
-using System;
-
-namespace TicTacToe.Web.Areas.HelpPage
+namespace MeetyChat.Services.Areas.HelpPage.SampleGeneration
 {
+    using System;
+
     /// <summary>
     /// This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
     /// </summary>

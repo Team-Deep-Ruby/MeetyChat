@@ -6,7 +6,7 @@ using System.Web;
 using Microsoft.AspNet.Identity;
 using System.Threading;
 
-namespace TicTacToe.Web.Infrastructure
+namespace MeetyChat.Services.Infrastructure
 {
     public class AspNetUserIdProvider : IUserIdProvider
     {

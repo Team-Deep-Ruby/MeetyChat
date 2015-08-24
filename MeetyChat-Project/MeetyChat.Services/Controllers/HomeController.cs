@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace TicTacToe.Web.Controllers
+namespace MeetyChat.Services.Controllers
 {
     public class HomeController : Controller
     {

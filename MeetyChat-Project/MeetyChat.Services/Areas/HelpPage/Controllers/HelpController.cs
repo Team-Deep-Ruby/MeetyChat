@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using TicTacToe.Web.Areas.HelpPage.ModelDescriptions;
-using TicTacToe.Web.Areas.HelpPage.Models;
+using MeetyChat.Services.Areas.HelpPage.ModelDescriptions;
+using MeetyChat.Services.Areas.HelpPage.Models;
 
-namespace TicTacToe.Web.Areas.HelpPage.Controllers
+namespace MeetyChat.Services.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

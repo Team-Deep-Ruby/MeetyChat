@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
-using TicTacToe.Web.Areas.HelpPage.ModelDescriptions;
+using MeetyChat.Services.Areas.HelpPage.ModelDescriptions;
 
-namespace TicTacToe.Web.Areas.HelpPage.Models
+namespace MeetyChat.Services.Areas.HelpPage.Models
 {
     /// <summary>
     /// The model that represents an API displayed on the help page.

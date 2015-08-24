@@ -5,9 +5,9 @@ using System.Reflection;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using System.Xml.XPath;
-using TicTacToe.Web.Areas.HelpPage.ModelDescriptions;
+using MeetyChat.Services.Areas.HelpPage.ModelDescriptions;
 
-namespace TicTacToe.Web.Areas.HelpPage
+namespace MeetyChat.Services.Areas.HelpPage
 {
     /// <summary>
     /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation file.

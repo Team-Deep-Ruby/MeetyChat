@@ -1,10 +1,11 @@
-﻿namespace TicTacToe.Web.Providers
+﻿namespace MeetyChat.Services.Providers
 {
     using System;
     using System.Collections.Generic;
     using System.Security.Claims;
     using System.Threading.Tasks;
     using MeetyChat.Models;
+    using MeetyChat.Services;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
     using Microsoft.Owin.Security.Cookies;

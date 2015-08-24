@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace TicTacToe.Web.Infrastructure
+namespace MeetyChat.Services.Infrastructure
 {
     public interface IUserIdProvider
     {

@@ -10,11 +10,13 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using TicTacToe.Web.Areas.HelpPage.ModelDescriptions;
-using TicTacToe.Web.Areas.HelpPage.Models;
+using MeetyChat.Services.Areas.HelpPage.ModelDescriptions;
+using MeetyChat.Services.Areas.HelpPage.Models;
 
-namespace TicTacToe.Web.Areas.HelpPage
+namespace MeetyChat.Services.Areas.HelpPage
 {
+    using SampleGeneration;
+
     public static class HelpPageConfigurationExtensions
     {
         private const string ApiModelPrefix = "MS_HelpPageApiModel_";

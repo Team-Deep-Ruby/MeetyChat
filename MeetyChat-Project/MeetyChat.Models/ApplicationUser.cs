@@ -1,6 +1,5 @@
 ﻿namespace MeetyChat.Models
 {
-    using System.Collections;
     using System.Collections.Generic;
     using System.Security.Claims;
     using System.Threading.Tasks;
@@ -10,10 +9,12 @@
     public class ApplicationUser : IdentityUser
     {
         private ICollection<Room> rooms;
+        private ICollection<Message> sendMessages; 
 
         public ApplicationUser()
         {
             this.rooms = new HashSet<Room>();
+            this.sendMessages = new HashSet<Message>(); 
         }
 
         public string Name { get; set; }
@@ -26,6 +27,12 @@
         {
             get { return this.rooms; }
             set { this.rooms = value; }
+        }
+
+        public virtual ICollection<Message> SendMessages
+        {
+            get { return this.sendMessages; }
+            set { this.sendMessages = value; }
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(

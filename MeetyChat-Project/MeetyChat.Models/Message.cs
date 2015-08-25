@@ -8,9 +8,9 @@
 
         public int RoomId { get; set; }
 
-        public Room Room { get; set; }
+        public virtual Room Room { get; set; }
 
-        public ApplicationUser Sender { get; set; }
+        public virtual ApplicationUser Sender { get; set; }
 
         public string Content { get; set; }
 

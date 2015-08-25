@@ -9,17 +9,15 @@
     using System.Web;
     using System.Web.Http;
     using MeetyChat.Models;
-    using MeetyChat.Services;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
     using Microsoft.Owin.Security.Cookies;
     using Microsoft.Owin.Security.OAuth;
+    using Models;
     using Providers;
-    using MeetyChat.Services;
-    using MeetyChat.Services.Models;
-    using MeetyChat.Services.Results;
+    using Results;
 
     [Authorize]
     [RoutePrefix("api/Account")]

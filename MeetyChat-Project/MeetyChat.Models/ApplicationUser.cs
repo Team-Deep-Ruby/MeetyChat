@@ -9,7 +9,7 @@
     public class ApplicationUser : IdentityUser
     {
         private ICollection<Room> rooms;
-        private ICollection<Message> sendMessages; 
+        private ICollection<Message> sendMessages;
 
         public ApplicationUser()
         {

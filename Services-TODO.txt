@@ -8,6 +8,6 @@ Rooms Controller:
 - Get members count.
 
 Messages Controller:
-- Add message to room.
-- Get all messages for room. (descending as query)
-- Get latest messages. (long poling)
+- Add message to room.                                       | POST api/rooms/{roomId}/messages
+- Get all messages for room. (descending as query)           | GET api/rooms/{roomId}/messages
+- Get latest messages. (long poling)                         | GET api/rooms/{roomId}/messages/latest

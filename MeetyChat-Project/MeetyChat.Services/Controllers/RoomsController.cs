@@ -9,7 +9,7 @@
 
     public class RoomsController : BaseApiController
     {
-        private IUserIdProvider provider;
+        private readonly IUserIdProvider provider;
 
         public RoomsController(IMeetyChatData data, IUserIdProvider provider) 
             : base(data)
@@ -57,6 +57,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public IHttpActionResult AddRoom(RoomBindingModel model)
         {
             if (!this.ModelState.IsValid)
@@ -73,9 +74,10 @@
         }
 
         [HttpDelete]
+        [Authorize]
         public IHttpActionResult DeleteRoom(int id)
         {
-            var room = this.data.Rooms.All().FirstOrDefault(r => r.Id == id);
+            var room = this.data.Rooms.GetById(id);
 
             if (room == null)
             {
@@ -86,6 +88,46 @@
             this.data.SaveChanges();
 
             return this.Ok("Room deleted successfully");
+        }
+
+        [HttpPut]
+        [Authorize]
+        [Route("api/rooms/{id}/join")]
+        public IHttpActionResult JoinRoom(int id)
+        {
+            var userId = this.provider.GetUserId();
+
+            var user = this.data.Users.GetById(userId);
+            var room = this.data.Rooms.GetById(id);
+
+            if (room == null)
+            {
+                return this.BadRequest("Such room does not exist");
+            }
+
+            room.Members.Add(user);
+            this.data.SaveChanges();
+            return this.Ok("Room joined successfully");
+        }
+
+        [HttpPut]
+        [Authorize]
+        [Route("api/rooms/{id}/leave")]
+        public IHttpActionResult LeaveRoom(int id)
+        {
+            var userId = this.provider.GetUserId();
+
+            var user = this.data.Users.GetById(userId);
+            var room = this.data.Rooms.GetById(id);
+
+            if (room == null)
+            {
+                return this.BadRequest("Such room does not exist");
+            }
+
+            room.Members.Remove(user);
+            this.data.SaveChanges();
+            return this.Ok("Room left successfully");
         }
     }
 }

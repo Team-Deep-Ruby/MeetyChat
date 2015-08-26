@@ -47,7 +47,7 @@
 
             if (!this.repositories.ContainsKey(typeOfModel))
             {
-                var type = typeof (IRepository<T>);
+                var type = typeof (Repository<T>);
                 this.repositories.Add(typeOfModel, Activator.CreateInstance(type, this.context));
             }
 

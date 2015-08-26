@@ -1,6 +1,7 @@
 ﻿namespace MeetyChat.Services.Controllers
 {
     using System;
+    using System.Linq;
     using System.Web.Http;
     using Data.Interfaces;
     using Infrastructure;
@@ -18,6 +19,7 @@
         [Route("api/rooms/{roomId}/messages")]
         public IHttpActionResult GetAllMessages(string roomId)
         {
+            var rooms = this.data.Rooms.All().Count();
             Guid roomGuid;
             try
             {

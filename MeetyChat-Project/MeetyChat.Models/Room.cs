@@ -20,7 +20,6 @@
         public int Id { get; set; }
 
         [Required]
-        [Index("IX_Name", IsUnique = true)]
         [MinLength(4)]
         public string Name { get; set; }
 

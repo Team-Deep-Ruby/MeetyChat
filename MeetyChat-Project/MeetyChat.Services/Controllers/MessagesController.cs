@@ -1,11 +1,8 @@
 ﻿namespace MeetyChat.Services.Controllers
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
-    using System.Threading.Tasks;
     using System.Web.Http;
     using System.Web.OData;
     using Data.Interfaces;
@@ -50,6 +47,7 @@
             return this.Ok(messages);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("api/rooms/{roomId}/messages")]
         public IHttpActionResult AddMessage(int roomId, 
@@ -67,8 +65,10 @@
                 return this.BadRequest("Invalid room id");
             }
 
+            var userId = this.userIdProvider.GetUserId();
+
             var sender = this.data.Users.All()
-                .FirstOrDefault(u => u.Id == messageModel.SenderId);
+                .FirstOrDefault(u => u.Id == userId);
 
             if (sender == null)
             {

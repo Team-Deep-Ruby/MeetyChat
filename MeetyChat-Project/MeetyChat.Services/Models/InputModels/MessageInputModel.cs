@@ -7,8 +7,5 @@
     {
         [Required]
         public string Content { get; set; }
-
-        [Required]
-        public string SenderId { get; set; }
     }
 }

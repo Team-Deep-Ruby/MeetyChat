@@ -1,0 +1,7 @@
+<div ng-if="!authService.isLoggedIn()">
+    <a href="#/login">Login</a>
+    <a href="#/register">Register</a>
+</div>
+
+<a ng-if="authService.isLoggedIn()"
+        href="" ng-click="logout()" ng-controller="LogoutController">Logout</a>

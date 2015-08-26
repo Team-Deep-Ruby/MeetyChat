@@ -9,6 +9,7 @@
         IDbSet<Message> Messages { get; set; }
         IDbSet<Room> Rooms { get; set; }
         IDbSet<ApplicationUser> Users { get; set; }
+        IDbSet<UserSession> UserSessions { get; }
 
         int SaveChanges();
 

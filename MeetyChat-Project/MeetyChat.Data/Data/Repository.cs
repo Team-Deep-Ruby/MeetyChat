@@ -39,6 +39,11 @@
             this.ChangeState(entity, EntityState.Deleted);
         }
 
+        public void Delete(object id)
+        {
+            this.Delete(this.GetById(id));
+        }
+
         public void Update(T entity)
         {
             this.ChangeState(entity, EntityState.Modified);

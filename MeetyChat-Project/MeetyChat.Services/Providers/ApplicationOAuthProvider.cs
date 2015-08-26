@@ -4,9 +4,9 @@
     using System.Collections.Generic;
     using System.Security.Claims;
     using System.Threading.Tasks;
+    using Data.Data;
     using MeetyChat.Models;
-    using MeetyChat.Services;
-    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using Microsoft.Owin.Security;
     using Microsoft.Owin.Security.Cookies;
     using Microsoft.Owin.Security.OAuth;
@@ -27,7 +27,8 @@
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+            var userManager = new ApplicationUserManager(
+                new UserStore<ApplicationUser>(new MeetyChatDbContext()));
 
             ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
 

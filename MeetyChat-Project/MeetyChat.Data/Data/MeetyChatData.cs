@@ -26,6 +26,11 @@
             get { return this.GetRepository<ApplicationUser>(); }
         }
 
+        public IRepository<UserSession> UserSessions
+        {
+            get { return this.GetRepository<UserSession>(); }
+        }
+
         public IRepository<Room> Rooms
         {
             get { return this.GetRepository<Room>(); }

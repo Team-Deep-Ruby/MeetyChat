@@ -7,6 +7,7 @@
         IRepository<ApplicationUser> Users { get; }
         IRepository<Room> Rooms { get; }
         IRepository<Message> Messages { get; }
+        IRepository<UserSession> UserSessions { get; }
 
         int SaveChanges();
     }

@@ -8,6 +8,7 @@
         T GetById(object id);
         void Add(T entity);
         void Delete(T entity);
+        void Delete(object id);
         void Update(T entity);
         void Detach(T entity);
     }

@@ -7,6 +7,9 @@ namespace MeetyChat.Services
 {
     using System.Reflection;
     using System.Web.Http;
+    using Data.Data;
+    using Data.Interfaces;
+    using Infrastructure;
     using Ninject;
     using Ninject.Web.Common.OwinHost;
     using Ninject.Web.WebApi.OwinHost;
@@ -17,7 +20,6 @@ namespace MeetyChat.Services
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            return;
             app.UseNinjectMiddleware(CreateKernel).UseNinjectWebApi(GlobalConfiguration.Configuration);
         }
 
@@ -25,19 +27,17 @@ namespace MeetyChat.Services
         {
             var kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
-            // RegisterMappings(kernel);
+            RegisterMappings(kernel);
             return kernel;
         }
 
         private static void RegisterMappings(StandardKernel kernel)
         {
-            // kernel.Bind<IMeetyChatData>().To<MeetyChatData>()
-            //     .WithConstructorArgument("context",
-            //         c => new MeetyChatDbContext());
-            // 
-            // kernel.Bind<IGameResultValidator>().To<GameResultValidator>();
-            // 
-            // kernel.Bind<IUserIdProvider>().To<AspNetUserIdProvider>();
+            kernel.Bind<IMeetyChatData>().To<MeetyChatData>()
+                .WithConstructorArgument("data",
+                    c => new MeetyChatDbContext());
+
+            kernel.Bind<IUserIdProvider>().To<AspNetUserIdProvider>();
         }
     }
 }

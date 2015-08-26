@@ -3,8 +3,6 @@ using System.Web.Mvc;
 
 namespace MeetyChat.Services.Areas.HelpPage
 {
-    using App_Start;
-
     public class HelpPageAreaRegistration : AreaRegistration
     {
         public override string AreaName

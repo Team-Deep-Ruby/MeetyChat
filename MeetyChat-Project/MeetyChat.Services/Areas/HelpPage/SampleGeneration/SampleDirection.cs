@@ -1,4 +1,4 @@
-namespace MeetyChat.Services.Areas.HelpPage.SampleGeneration
+namespace MeetyChat.Services.Areas.HelpPage
 {
     /// <summary>
     /// Indicates whether the sample is used for request or response

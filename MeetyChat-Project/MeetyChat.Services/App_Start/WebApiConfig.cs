@@ -1,6 +1,7 @@
 ﻿namespace MeetyChat.Services
 {
     using System.Web.Http;
+    using System.Web.OData.Extensions;
     using Microsoft.Owin.Security.OAuth;
 
     public static class WebApiConfig
@@ -11,6 +12,7 @@
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+            config.AddODataQueryFilter();
 
             // Web API routes
             config.MapHttpAttributeRoutes();

@@ -1,0 +1,13 @@
+Rooms Controller:
+- Add room.
+- Delete room.
+- Join room.
+- Leave room.
+- Get rooms. (as query)
+- Get members.
+- Get members count.
+
+Messages Controller:
+- Add message to room.
+- Get all messages for room. (descending as query)
+- Get latest messages. (long poling)

@@ -1,6 +1,9 @@
 ﻿namespace MeetyChat.Models
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data;
 
     public class Room
     {
@@ -13,7 +16,13 @@
             this.members = new HashSet<ApplicationUser>();
         }
 
+        [Key]
         public int Id { get; set; }
+
+        [Required]
+        [Index("IX_Name", IsUnique = true)]
+        [MinLength(4)]
+        public string Name { get; set; }
 
         public virtual ICollection<Message> Messages
         {

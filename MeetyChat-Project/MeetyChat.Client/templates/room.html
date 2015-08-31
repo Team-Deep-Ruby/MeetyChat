@@ -1,0 +1,29 @@
+<div ng-init="getRoomById()">
+    <h3>{{room.Name}}</h3>
+    <h4>{{room.MembersCount}} Members</h4>
+    <ul>
+        <li ng-repeat="member in room.Members">
+            <a href="">
+                {{member.Name}}
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div ng-controller="MessageController" ng-init="getLatestMessages()">
+
+    <a href="" ng-click="getAllMessages()">Get All Messages</a>
+
+    <ul>
+        <li ng-repeat="message in messages">
+            <p>{{message.SenderId}}</p>
+            <p>{{message.Content}}</p>
+            <p>{{message.Date}}</p>
+        </li>
+    </ul>
+
+    <form id="sendMessageForm" name="sendMessageForm" ng-submit="sendMessage(messageContent)">
+            <input id="messageContent" placeholder="Write a reply..."
+                   ng-model="messageContent.Content" minlength="2" required />
+    </form>
+</div>

@@ -1,9 +1,14 @@
 'use strict';
 
 meetyChatApp.controller('LogoutController',
-    function LogoutController($scope, $location, authService, logoutService, Notification) {
+    function LogoutController($scope, $location, authService, logoutService, Notification, roomsService, $routeParams) {
 
         $scope.logout = function () {
+
+            if ($routeParams.id){
+                roomsService.leaveRoom($routeParams.id)
+            }
+
             logoutService.logout()
                 .then(function (data) {
                     authService.clearCredentials();
@@ -11,6 +16,6 @@ meetyChatApp.controller('LogoutController',
                     $location.path('/');
                 }, function (error) {
                     Notification.error(error.message);
-                })
+                });
         }
     });

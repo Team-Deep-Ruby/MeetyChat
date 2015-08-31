@@ -11,7 +11,7 @@ meetyChatApp.factory('loginService',
                     })
                     .error(function (error) {
                         deferred.reject(error)
-                    })
+                    });
 
                 return deferred.promise;
             }

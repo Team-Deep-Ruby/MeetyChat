@@ -41,6 +41,14 @@
             get { return this.GetRepository<Message>(); }
         }
 
+        public IRepository<RoomsJoiningHistory> RoomJoiningHistory
+        {
+            get
+            {
+                return this.GetRepository<RoomsJoiningHistory>();
+            }
+        }
+
         public int SaveChanges()
         {
             return this.context.SaveChanges();

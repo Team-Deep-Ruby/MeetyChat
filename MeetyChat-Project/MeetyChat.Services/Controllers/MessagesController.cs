@@ -34,12 +34,13 @@
             }
 
             var messages = room.Messages
-                .Select(m => new
+                .Select(m => new MessageOutputModel()
                 {
                     Id = m.Id,
                     Content = m.Content,
                     Date = m.Date,
-                    AuthorId = m.Sender.Id
+                    SenderId = m.Sender.Id,
+                    RoomId = roomId
                 })
                 .OrderByDescending(m => m.Date)
                 .AsQueryable();

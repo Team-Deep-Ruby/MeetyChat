@@ -81,7 +81,7 @@
                 Room = room,
                 Content = messageModel.Content,
                 Date = DateTime.Now,
-                Sender = sender
+                SenderId = userId
             };
 
             this.data.Messages.Add(message);

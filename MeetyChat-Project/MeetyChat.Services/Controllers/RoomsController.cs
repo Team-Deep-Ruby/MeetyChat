@@ -6,7 +6,9 @@
     using Infrastructure;
     using MeetyChat.Models;
     using Models;
+    using UserSessionUtils;
 
+    [SessionAuthorize]
     public class RoomsController : BaseApiController
     {
         private readonly IUserIdProvider provider;
@@ -27,7 +29,7 @@
                     r.Name,
                     Members = r.Members.Count
                 });
-
+            
             return this.Ok(rooms);
         }
 
@@ -44,7 +46,15 @@
                     {
                         m.Name,
                         m.Gender
-                    })
+                    }),
+                    Messages = r.Messages
+                        .Select(m => new 
+                        {
+                            Id = m.Id,
+                            SenderId = m.SenderId,
+                            Content = m.Content,
+                            Date = m.Date
+                        })
                 })
                 .FirstOrDefault(r => r.Id == id);
 
@@ -119,7 +129,7 @@
 
             var user = this.data.Users.GetById(userId);
             var room = this.data.Rooms.GetById(id);
-
+                
             if (room == null)
             {
                 return this.BadRequest("Such room does not exist");

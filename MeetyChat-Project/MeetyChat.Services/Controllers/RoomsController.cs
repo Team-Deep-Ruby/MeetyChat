@@ -34,6 +34,13 @@
         }
 
         [HttpGet]
+        [Route("api/rooms/{roomId}/users")]
+        public IHttpActionResult GetUsersByRoom(int roomId)
+        {
+            return this.Ok();
+        }
+
+        [HttpGet]
         public IHttpActionResult GetRoomById(int id)
         {
             var room = this.data.Rooms.All()

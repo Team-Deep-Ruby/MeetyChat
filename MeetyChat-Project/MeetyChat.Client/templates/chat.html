@@ -1,0 +1,38 @@
+<div ng-controller="chatController" ng-init="getAllRooms()">
+
+    <div class="rooms-wrap">
+        <h3>Rooms</h3>
+        <div class="rooms" ng-repeat="room in rooms">
+            <p>{{room.name}}</p>
+        </div>
+    </div>
+
+    <div class="chat-wrap">
+        <div class="chat">
+            <div>
+                <h3>Chat</h3>
+            </div>
+
+            <div class="msg">
+                <div class="chat-img">
+                    <img ng-src="{{message.user.profileImg}} || 'resources/defaultProfileImg.png"/>
+                </div>
+                <p>
+                    {{message.user.name}}
+                </p>
+                <p>
+                    {{message.content}}
+                </p>
+                <p>
+                    {{message.date}}
+                </p>
+            </div>
+            <div>
+                <input type="text"/>
+                <button ng-click="sendMsg(content)" role="button">Send</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>

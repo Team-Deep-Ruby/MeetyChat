@@ -7,6 +7,7 @@
     using Infrastructure;
     using MeetyChat.Models;
     using Models;
+    using Models.Rooms;
     using UserSessionUtils;
 
     [SessionAuthorize]
@@ -24,11 +25,12 @@
         public IHttpActionResult GetAllRooms()
         {
             var rooms = this.data.Rooms.All()
-                .Select(r => new
+                .Select(r => new RoomViewModel
                 {
-                    r.Id,
-                    r.Name,
-                    Members = r.Members.Count
+                
+                    Id = r.Id,
+                    Name = r.Name,
+                    MembersCount = r.Members.Count
                 });
             
             return this.Ok(rooms);

@@ -93,6 +93,7 @@
     <Compile Include="MessagesControllerTests.cs" />
     <Compile Include="Mocks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoomsControllerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MeetyChat.Data\MeetyChat.Data.csproj">

@@ -13,7 +13,7 @@
 
     public class MessagesController : BaseApiController
     {
-        private IUserIdProvider userIdProvider;
+        private readonly IUserIdProvider userIdProvider;
 
         public MessagesController(IMeetyChatData data, IUserIdProvider userIdProvider)
             : base(data)

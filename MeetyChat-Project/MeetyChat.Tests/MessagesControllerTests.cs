@@ -32,22 +32,22 @@
         }
 
         [TestMethod]
-        public void GettingAllMessagesShouldReturnAllMessages()
+        public void TestGettingAllMessagesShouldReturnAllMessages()
         {
 
-            var httpResponse = controller.GetAllMessages(1).ExecuteAsync(new CancellationToken()).Result;
+            var httpResponse = this.controller.GetAllMessages(1).ExecuteAsync(new CancellationToken()).Result;
 
             var serverResponseJson = httpResponse.Content.ReadAsStringAsync().Result;
-            var messages = this.serializer.Deserialize<List<MessageOutputModel>>(serverResponseJson);
+            var messages = this.serializer.Deserialize<IList<MessageOutputModel>>(serverResponseJson);
             var newMessagesJson = serializer.Serialize(messages);
 
-            var expectedResult = this.GetExpectedMessagesResult();
+            var expectedResult = GetExpectedMessagesResult();
             var json = serializer.Serialize(expectedResult);
 
             Assert.AreEqual(json, newMessagesJson);
         }
 
-        public void SetupController()
+        private void SetupController()
         {
             
             var config = new HttpConfiguration();
@@ -59,8 +59,8 @@
             this.controller.Request = request;
             this.controller.Request.Properties[HttpPropertyKeys.HttpConfigurationKey] = config;
         }
-
-        private List<MessageOutputModel> GetExpectedMessagesResult()
+            
+        private static IList<MessageOutputModel> GetExpectedMessagesResult()
         {
             return new List<MessageOutputModel>()
             {

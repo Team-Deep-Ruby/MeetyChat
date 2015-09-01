@@ -3,8 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Net.Mime;
-    using System.Runtime.CompilerServices;
     using Data.Interfaces;
     using Models;
     using Moq;
@@ -41,27 +39,7 @@
         {
             var repositoryMock = new Mock<IRepository<Room>>();
 
-            var roomsList = new List<Room>()
-            {
-                new Room()
-                {
-                    Id = 1,
-                    Name = "room 1",
-                    Messages = GetMockedMessagesList()
-                },
-                new Room()
-                {
-                    Id = 2,
-                    Name = "room 2",
-                    Messages = GetMockedMessagesList()
-                },
-                new Room()
-                {
-                    Id = 3,
-                    Name = "room 3",
-                    Messages = GetMockedMessagesList()
-                },
-            };
+            var roomsList = GetMockedRoomsList();
 
             repositoryMock.Setup(x => x.All()).Returns(() =>
                 roomsList
@@ -80,7 +58,7 @@
             return unitOfWorkMock;
         }
 
-        public static List<Message> GetMockedMessagesList()
+        private static IList<Message> GetMockedMessagesList()
         {
             return new List<Message>()
             {
@@ -114,7 +92,35 @@
             };
         }
 
-        public static ApplicationUser GetMockedUser()
+        private static IEnumerable<Room> GetMockedRoomsList()
+        {
+            return new List<Room>()
+            {
+                new Room()
+                {
+                    Id = 1,
+                    Name = "room 1",
+                    Members = new List<ApplicationUser>(){GetMockedUser()},
+                    Messages = GetMockedMessagesList()
+                },
+                new Room()
+                {
+                    Id = 2,
+                    Name = "room 2",
+                    Members = new List<ApplicationUser>(){GetMockedUser()},
+                    Messages = GetMockedMessagesList()
+                },
+                new Room()
+                {
+                    Id = 3,
+                    Name = "room 3",
+                    Members = new List<ApplicationUser>(){GetMockedUser()},
+                    Messages = GetMockedMessagesList()
+                },
+            };
+        } 
+
+        private static ApplicationUser GetMockedUser()
         {
             return new ApplicationUser()
             {   

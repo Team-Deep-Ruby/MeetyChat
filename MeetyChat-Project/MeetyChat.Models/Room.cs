@@ -1,10 +1,7 @@
 ﻿namespace MeetyChat.Models
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data;
 
     public class Room
     {
@@ -23,7 +20,12 @@
         [Required]
         [MinLength(4)]
         public string Name { get; set; }
-        
+
+        public int MembersCount
+        {
+            get { return this.Members.Count; }
+        }
+
         public virtual ICollection<Message> Messages
         {
             get { return this.messages; }

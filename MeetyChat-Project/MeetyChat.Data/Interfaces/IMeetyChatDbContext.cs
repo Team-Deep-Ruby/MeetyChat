@@ -11,6 +11,8 @@
         IDbSet<ApplicationUser> Users { get; set; }
         IDbSet<UserSession> UserSessions { get; }
 
+        IDbSet<RoomsJoiningHistory> RoomsJoiningHistories { get; }
+
         int SaveChanges();
 
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;

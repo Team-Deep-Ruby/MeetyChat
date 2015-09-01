@@ -104,12 +104,18 @@
 
             var messages = this.GetLatestMessages(DateTime.Now);
 
+            if (messages == null)
+            {
+                return this.Ok("No new messages were found.");
+            }
             return this.Ok(messages);
         }
 
         private IQueryable<MessageOutputModel>
             GetLatestMessages(DateTime date)
         {
+            TimeSpan timeout = new TimeSpan(0, 0, 2, 0); // 2 minutes
+
             while (true)
             {
                 var messages = this.data.Messages.All()
@@ -127,6 +133,10 @@
                 if (messages.Any())
                 {
                     return messages;
+                }
+                else if (date - DateTime.Now > timeout)
+                {
+                    return null;
                 }
 
                 Thread.Sleep(200);

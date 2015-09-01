@@ -41,7 +41,7 @@
             get { return this.GetRepository<Message>(); }
         }
 
-        public IRepository<RoomsJoiningHistory> RoomJoiningHistory
+        public IRepository<RoomsJoiningHistory> RoomsJoiningHistory
         {
             get
             {

@@ -17,6 +17,7 @@
         public IDbSet<Message> Messages { get; set; }
         public IDbSet<Room> Rooms { get; set; }
         public IDbSet<UserSession> UserSessions { get; set; }
+        public IDbSet<RoomsJoiningHistory> RoomsJoiningHistories { get; set; }
 
         public new IDbSet<T> Set<T>() where T : class
         {

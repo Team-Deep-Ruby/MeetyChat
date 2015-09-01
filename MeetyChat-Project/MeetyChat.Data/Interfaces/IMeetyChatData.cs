@@ -8,6 +8,7 @@
         IRepository<Room> Rooms { get; }
         IRepository<Message> Messages { get; }
         IRepository<UserSession> UserSessions { get; }
+        IRepository<RoomsJoiningHistory> RoomsJoiningHistory { get; }
 
         int SaveChanges();
     }

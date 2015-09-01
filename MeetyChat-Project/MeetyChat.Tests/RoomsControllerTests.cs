@@ -9,6 +9,7 @@
     using System.Web.Http.Routing;
     using System.Web.Script.Serialization;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Mocks;
     using Services.Controllers;
     using Services.Models.Rooms;
 
@@ -17,11 +18,14 @@
     {
         private RoomsController controller;
         private JavaScriptSerializer serializer;
+        private MeetyChatDataMock unitOfWork;
 
         [TestInitialize]
         public void Initialize()
         {
-            this.controller = new RoomsController(Mocks.GetUnitOfWorkMock().Object, Mocks.GetUserIdProvider().Object);
+            this.unitOfWork = PublicMocks.GetUnitOfWorkMock();
+
+            this.controller = new RoomsController(this.unitOfWork, PublicMocks.GetUserIdProvider().Object);
             this.serializer = new JavaScriptSerializer();
             this.SetupController();
         }

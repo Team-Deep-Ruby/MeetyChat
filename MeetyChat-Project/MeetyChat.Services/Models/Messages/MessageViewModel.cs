@@ -8,7 +8,7 @@
     {
         public int Id { get; set; }
 
-        public string SenderId { get; set; }
+        public string SenderName { get; set; }
 
         public string Content { get; set; }
 
@@ -21,7 +21,7 @@
                 return m => new MessageViewModel
                 {
                     Id = m.Id,
-                    SenderId = m.SenderId,
+                    SenderName = m.Sender.Name,
                     Content = m.Content,
                     Date = m.Date
                 };

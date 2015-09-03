@@ -34,12 +34,12 @@
             }
 
             var messages = room.Messages
-                .Select(m => new MessageOutputModel()
+                .Select(m => new MessageOutputModel
                 {
                     Id = m.Id,
                     Content = m.Content,
                     Date = m.Date,
-                    SenderId = m.Sender.Id,
+                    SenderName = m.Sender.Name,
                     RoomId = roomId
                 })
                 .OrderByDescending(m => m.Date)
@@ -123,7 +123,7 @@
                     .Select(m => new MessageOutputModel()
                     {
                         Date = m.Date,
-                        SenderId = m.Sender.Id,
+                        SenderName = m.Sender.Name,
                         Id = m.Id,
                         Content = m.Content
                     })

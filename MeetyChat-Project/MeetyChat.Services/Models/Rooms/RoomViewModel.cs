@@ -6,6 +6,7 @@
     using System.Linq.Expressions;
     using MeetyChat.Models;
     using Messages;
+    using Users;
 
     public class RoomViewModel
     {
@@ -15,8 +16,8 @@
 
         public int MembersCount { get; set; }
 
-        public IEnumerable<MessageViewModel> Messages { get; set; }
-
+        public IEnumerable<MembersViewModel> Members { get; set; } 
+        
         public static Expression<Func<Room, RoomViewModel>> Create
         {
             get
@@ -26,14 +27,12 @@
                     Id = r.Id,
                     Name = r.Name,
                     MembersCount = r.Members.Count,
-                    Messages = r.Messages
-                        .Select(m => new MessageViewModel
-                        {
-                            Id = m.Id,
-                            SenderId = m.SenderId,
-                            Content = m.Content,
-                            Date = m.Date
-                        })
+                    Members = r.Members
+                        .Select(m => new MembersViewModel
+                    {
+                        Name = m.Name,
+                        Gender = m.Gender
+                    })
                 };
             }
         }

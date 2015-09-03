@@ -277,8 +277,10 @@
     <Compile Include="Models\MessageOutputModel.cs" />
     <Compile Include="Models\Messages\MessageViewModel.cs" />
     <Compile Include="Models\RoomBindingModel.cs" />
+    <Compile Include="Models\Rooms\RoomListViewModel.cs" />
     <Compile Include="Models\Rooms\RoomViewModel.cs" />
     <Compile Include="Models\Users\LoginBindingModel.cs" />
+    <Compile Include="Models\Users\MembersViewModel.cs" />
     <Compile Include="Models\Users\RegisterBindingModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />

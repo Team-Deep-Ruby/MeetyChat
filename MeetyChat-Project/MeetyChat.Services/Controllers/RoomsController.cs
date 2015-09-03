@@ -25,13 +25,7 @@
         public IHttpActionResult GetAllRooms()
         {
             var rooms = this.data.Rooms.All()
-                .Select(r => new RoomViewModel
-                {
-                
-                    Id = r.Id,
-                    Name = r.Name,
-                    MembersCount = r.Members.Count
-                });
+                .Select(RoomListViewModel.Create);
             
             return this.Ok(rooms);
         }
@@ -49,7 +43,7 @@
 
             var members = room.Members.Select(m => new
             {
-                Id = m.Id,
+                m.Id,
                 Username = m.UserName
             }).AsQueryable();
 
@@ -77,7 +71,7 @@
                     .Where(rjh => rjh.LeftOn > date)
                     .Select(rjh => new
                     {
-                        Id = rjh.User.Id,
+                        rjh.User.Id,
                         Username = rjh.User.UserName
                     });
 
@@ -114,9 +108,9 @@
                     .AsQueryable()
                     .Select(l => new
                     {
-                        Id = l.User.Id,
+                        l.User.Id,
                         Username = l.User.UserName,
-                        JoinedOn = l.JoinedOn,
+                        l.JoinedOn,
                         RoomId = l.Room.Id
                     });
 
@@ -135,25 +129,7 @@
         public IHttpActionResult GetRoomById(int id)
         {
             var room = this.data.Rooms.All()
-                .Select(r => new
-                {
-                    r.Id,
-                    r.Name,
-                    MembersCount = r.Members.Count,
-                    Members = r.Members.Select(m => new
-                    {
-                        m.Name,
-                        m.Gender
-                    }),
-                    Messages = r.Messages
-                        .Select(m => new 
-                        {
-                            Id = m.Id,
-                            SenderId = m.SenderId,
-                            Content = m.Content,
-                            Date = m.Date
-                        })
-                })
+                .Select(RoomViewModel.Create)
                 .FirstOrDefault(r => r.Id == id);
 
             if (room == null)

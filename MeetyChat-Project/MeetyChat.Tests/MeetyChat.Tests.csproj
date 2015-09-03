@@ -92,6 +92,8 @@
   <ItemGroup>
     <Compile Include="MessagesControllerTests.cs" />
     <Compile Include="Mocks.cs" />
+    <Compile Include="Mocks\MeetyChatDataMock.cs" />
+    <Compile Include="Mocks\RepositoryMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoomsControllerTests.cs" />
   </ItemGroup>

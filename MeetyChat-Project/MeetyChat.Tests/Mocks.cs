@@ -3,12 +3,15 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.Remoting.Messaging;
+    using Data.Data;
     using Data.Interfaces;
+    using Mocks;
     using Models;
     using Moq;
     using Services.Infrastructure;
 
-    public class Mocks
+    public class PublicMocks
     {
         public const string MockUserId = "UserIdMock";
 
@@ -20,19 +23,6 @@
                 Returns(MockUserId);
 
             return userIdProviderMock;
-        }
-
-        public static Mock<IRepository<Message>> GetMessageRepositoryMock()
-        {
-            var repositoryMock = new Mock<IRepository<Message>>();
-
-            var messageList = GetMockedMessagesList();
-
-            repositoryMock.Setup(x => x.All()).Returns(() =>
-                messageList
-                .AsQueryable());
-
-            return repositoryMock;
         }
 
         public static Mock<IRepository<Room>> GetRoomRepositoryMock()
@@ -48,17 +38,17 @@
             return repositoryMock;
         }
 
-        public static Mock<IMeetyChatData> GetUnitOfWorkMock()
+        public static MeetyChatDataMock GetUnitOfWorkMock()
         {
-            var unitOfWorkMock = new Mock<IMeetyChatData>();
+            var data = new MeetyChatDataMock();
+            PopulateMockMessages(data);
+            PopulateMockRooms(data);
+            PopulateMockUsers(data);
 
-            unitOfWorkMock.Setup(u => u.Messages).Returns(() => GetMessageRepositoryMock().Object);
-            unitOfWorkMock.Setup(u => u.Rooms).Returns(() => GetRoomRepositoryMock().Object);
-
-            return unitOfWorkMock;
+            return data;
         }
 
-        private static IList<Message> GetMockedMessagesList()
+        public static IList<Message> GetMockedMessagesList()
         {
             return new List<Message>()
             {
@@ -92,7 +82,7 @@
             };
         }
 
-        private static IEnumerable<Room> GetMockedRoomsList()
+        public static IList<Room> GetMockedRoomsList()
         {
             return new List<Room>()
             {
@@ -120,7 +110,7 @@
             };
         } 
 
-        private static ApplicationUser GetMockedUser()
+        public static ApplicationUser GetMockedUser()
         {
             return new ApplicationUser()
             {   
@@ -129,6 +119,71 @@
                 UserName = "user",
                 Id = MockUserId
             };
+        }
+
+        private static void PopulateMockUsers(MeetyChatDataMock data)
+        {
+            data.Users.Add(PublicMocks.GetMockedUser());
+        }
+
+        private static void PopulateMockRooms(MeetyChatDataMock data)
+        {
+            data.Rooms.Add(new Room()
+            {
+                Id = 1,
+                Name = "room 1",
+                Members = new List<ApplicationUser>() { PublicMocks.GetMockedUser() },
+                Messages = data.Messages.All().ToList()
+            });
+
+            data.Rooms.Add(new Room()
+            {
+                Id = 2,
+                Name = "room 2",
+                Members = new List<ApplicationUser>() { GetMockedUser() },
+                Messages = data.Messages.All().ToList()
+            });
+
+            data.Rooms.Add(new Room()
+            {
+                Id = 3,
+                Name = "room 3",
+                Members = new List<ApplicationUser>() { PublicMocks.GetMockedUser() },
+                Messages = data.Messages.All().ToList()
+            });
+        }
+
+        private static void PopulateMockMessages(MeetyChatDataMock data)
+        {
+            data.Messages.Add(new Message()
+            {
+                Content = "Message 1",
+                Date = new DateTime(2010, 5, 5),
+                Id = 1,
+                SenderId = PublicMocks.MockUserId,
+                Sender = PublicMocks.GetMockedUser(),
+                RoomId = 1
+            });
+
+            data.Messages.Add(new Message()
+            {
+                Content = "Message 2",
+                Date = new DateTime(2014, 4, 9),
+                Id = 2,
+                SenderId = PublicMocks.MockUserId,
+                Sender = PublicMocks.GetMockedUser(),
+                RoomId = 1
+            });
+
+            data.Messages.Add(new Message()
+            {
+                Content = "Message 3",
+                Date = new DateTime(2015, 3, 2),
+                Id = 3,
+                SenderId = PublicMocks.MockUserId,
+                Sender = PublicMocks.GetMockedUser(),
+                RoomId = 1
+            });
         }
     }
 }

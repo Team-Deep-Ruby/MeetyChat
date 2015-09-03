@@ -111,8 +111,7 @@
             return this.Ok(messages);
         }
 
-        private IQueryable<MessageOutputModel>
-            GetLatestMessages(DateTime date)
+        private IQueryable<MessageOutputModel> GetLatestMessages(DateTime date)
         {
             TimeSpan timeout = new TimeSpan(0, 0, 2, 0); // 2 minutes
 

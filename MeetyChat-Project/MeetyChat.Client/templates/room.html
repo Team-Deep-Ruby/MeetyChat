@@ -1,5 +1,6 @@
-<div ng-init="getLatestUsers(room.Id)">
-    <div ng-init="getLatestLeftUsers(room.Id)">
+<!--<div ng-init="getLatestUsers(room.Id)">-->
+    <!--<div ng-init="getLatestLeftUsers(room.Id)">-->
+        <div>
         <h3>{{room.Name}}</h3>
         <h4>{{room.MembersCount}} Members</h4>
         <ul>
@@ -10,7 +11,7 @@
             </li>
         </ul>
     </div>
-</div>
+<!--</div>-->
 
 <div ng-controller="MessageController" ng-init="getLatestMessages()">
 

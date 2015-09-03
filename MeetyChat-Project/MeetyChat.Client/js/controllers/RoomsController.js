@@ -59,6 +59,7 @@ meetyChatApp.controller('RoomsController',
         $scope.getLatestUsers = function (roomId) {
             roomsService.getLatestUsers(roomId)
                 .then(function (data) {
+                    console.log(data);
                     if (data) {
                         $scope.room.MembersCount++;
                         $scope.room.Members.push({
@@ -77,11 +78,21 @@ meetyChatApp.controller('RoomsController',
                     if (data) {
                         $scope.room.MembersCount--;
 
-                        $scope.room.Members.forEach(function (index, member) {
-                            if (index !== 0) {
-                                $scope.room.Members.splice($scope.room.Members.indexOf(member))
+                        //$scope.room.Members.forEach(function (member, index) {
+                        //    console.log(index);
+                        //    console.log(member);
+                        //    console.log($scope.room.Members);
+                        //    //$scope.room.Members.splice($scope.room.Members.indexOf(member))
+                        //
+                        //});
+                        //
+                        var i = $scope.room.Members.length;
+                        while (i--) {
+                            if ($scope.room.Members[i].Name === data[0].Username){
+                                $scope.room.Members.splice(i);
+                                break;
                             }
-                        });
+                        }
                     }
                     $timeout($scope.getLatestLeftUsers(roomId), 1);
                 }, function (error) {

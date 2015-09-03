@@ -1,7 +1,7 @@
 'use strict';
 
 meetyChatApp.factory('authService',
-    function authService($http) {
+    function authService($http, $location, Notification) {
         return {
             isLoggedIn: function () {
                 return sessionStorage.currentUser != undefined;
@@ -23,5 +23,12 @@ meetyChatApp.factory('authService',
             clearCredentials: function () {
                 delete sessionStorage.currentUser;
                 delete $http.defaults.headers.common.Authorization;
+            },
+
+            isLogged : function () {
+                if (!this.isLoggedIn()) {
+                    $location.path('/');
+                    Notification.info("Please log in.");
+                }
             }
     }});

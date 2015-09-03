@@ -1,10 +1,14 @@
 <div ng-init="getRooms()">
+    <form ng-submit="addRoom(room.Name)">
+        <textarea id="room.Name" ng-model="room.Name" placeholder="room name"></textarea>
+        <button id="addRoomButton" type="submit">Add Room</button>
+    </form>
     <ul>
         <li ng-repeat="room in roomsList">
             <a href="" ng-click="joinRoom(room)">
-                {{room.Name}} - {{room.Members}} Members
-                {{a}}
+                {{room.Name}} - {{room.MembersCount}} Members
             </a>
+            <button ng-click="deleteRoom(room)">Delete Room</button>
         </li>
     </ul>
 </div>

@@ -15,13 +15,14 @@ meetyChatApp.controller('MessageController',
         $scope.getLatestMessages = function () {
             messageService.getLatestMessages($routeParams.id)
                 .then(function (data) {
-                    console.log($scope.messages);
-                    if ($scope.messages) {
-                        $scope.messages.push(data[0]);
-                    } else {
-                        $scope.messages = data;
-                    }
                     $timeout($scope.getLatestMessages, 1);
+                    if (data) {
+                        if ($scope.messages) {
+                            $scope.messages.push(data[0]);
+                        } else {
+                            $scope.messages = data;
+                        }
+                    }
                 }, function (error) {
                     Notification.error(error.Message);
                 });
@@ -29,7 +30,7 @@ meetyChatApp.controller('MessageController',
 
         $scope.sendMessage = function (messageContent) {
              messageService.sendMessage($routeParams.id, messageContent)
-                .then(function (data) {
+                .then(function () {
                     $('#messageContent').val('');
                     Notification.success('Message successfully sent.');
                 }, function (error) {

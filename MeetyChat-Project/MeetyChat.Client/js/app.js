@@ -27,15 +27,29 @@ var meetyChatApp = angular
                 templateUrl: 'templates/roomsList.html',
                 controller: 'RoomsController',
                 resolve : {
-                    isLogged: isLogged,
-                    leaveRoom: leaveRoom
+                    isLogged: function (authService) {
+                        authService.isLogged();
+                    },
+                    leaveRoom: function (roomsService, $routeParams) {
+                        if ($routeParams.id) {
+                            roomsService.leaveRoom($routeParams.id)
+                        }
+                    },
+                    getRooms: function (authService, roomsService) {
+                        return roomsService.getAllRooms();
+                    }
                 }
             })
             .when('/rooms/:id', {
                 templateUrl: 'templates/room.html',
                 controller: 'RoomsController',
                 resolve : {
-                    isLogged: isLogged
+                    isLogged: function (authService) {
+                        authService.isLogged();
+                    },
+                    getRooms: function (authService, roomsService, $route) {
+                        return roomsService.getRoomById($route.current.params.id);
+                    }
                 }
             })
             .otherwise({
@@ -47,18 +61,5 @@ var isLoggedIn = function ($location, authService, Notification) {
     if (authService.isLoggedIn()) {
         $location.path('/');
         Notification.info("You are already logged in.");
-    }
-};
-
-var isLogged = function ($location, authService, Notification) {
-    if (!authService.isLoggedIn()) {
-        $location.path('/');
-        Notification.info("Please log in.");
-    }
-};
-
-var leaveRoom = function (roomsService, $routeParams) {
-    if ($routeParams.id){
-        roomsService.leaveRoom($routeParams.id)
     }
 };

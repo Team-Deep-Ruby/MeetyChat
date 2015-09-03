@@ -7,9 +7,21 @@ meetyChatApp.controller('RoomsController',
             if (getRooms.length > 0){
                 $scope.roomsList = getRooms;
             } else {
-                $scope.room = getRooms;
+                //$scope.room = getRooms;
             }
         }
+
+        $scope.getRoomById = function () {
+            roomsService.getRoomById($routeParams.id)
+                .then(function (data) {
+                    $scope.room = data;
+                    if ($route.current.$$route.originalPath == '/rooms/:id'){
+                        $timeout($scope.getRoomById, 20000);
+                    }
+                }, function (error) {
+                    //Notification.error(error.Message)
+                })
+        };
 
         $scope.joinRoom = function (room) {
             roomsService.joinRoom(room)
@@ -59,7 +71,6 @@ meetyChatApp.controller('RoomsController',
         $scope.getLatestUsers = function (roomId) {
             roomsService.getLatestUsers(roomId)
                 .then(function (data) {
-                    console.log(data);
                     if (data) {
                         $scope.room.MembersCount++;
                         $scope.room.Members.push({
@@ -77,15 +88,6 @@ meetyChatApp.controller('RoomsController',
                 .then(function (data) {
                     if (data) {
                         $scope.room.MembersCount--;
-
-                        //$scope.room.Members.forEach(function (member, index) {
-                        //    console.log(index);
-                        //    console.log(member);
-                        //    console.log($scope.room.Members);
-                        //    //$scope.room.Members.splice($scope.room.Members.indexOf(member))
-                        //
-                        //});
-                        //
                         var i = $scope.room.Members.length;
                         while (i--) {
                             if ($scope.room.Members[i].Name === data[0].Username){
@@ -98,5 +100,5 @@ meetyChatApp.controller('RoomsController',
                 }, function (error) {
                     Notification.error(error.Message);
                 })
-        }
+        };
     });

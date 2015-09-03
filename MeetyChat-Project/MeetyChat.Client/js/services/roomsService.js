@@ -109,5 +109,20 @@ meetyChatApp.factory('roomsService',
                     });
 
                 return deferred.promise;
+            },
+
+            getUsersByRoom: function (roomId) {
+                var url = BASE_URL + '/rooms/' + roomId + '/users';
+
+                var deferred = $q.defer();
+                $http.get(url)
+                    .success(function (data) {
+                        deferred.resolve(data);
+                    })
+                    .error(function (error) {
+                        deferred.reject(error)
+                    });
+
+                return deferred.promise;
             }
         }});

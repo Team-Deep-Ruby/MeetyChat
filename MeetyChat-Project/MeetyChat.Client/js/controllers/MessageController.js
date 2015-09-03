@@ -13,12 +13,12 @@ meetyChatApp.controller('MessageController',
         };
 
         $scope.getLatestMessages = function () {
-            messageService.getLatestMessages($routeParams.id)
+            messageService.getLatestMessages($route.current.params.id)
                 .then(function (data) {
-                    $timeout($scope.getLatestMessages, 1);
+                    $timeout($scope.getLatestMessages, 0);
                     if (data) {
                         if ($scope.messages) {
-                            $scope.messages.push(data[0]);
+                            $scope.messages.unshift(data[0]);
                         } else {
                             $scope.messages = data;
                         }

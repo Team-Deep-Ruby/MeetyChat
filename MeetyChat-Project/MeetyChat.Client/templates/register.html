@@ -1,54 +1,53 @@
-<form ng-submit="register(userData)" name="registerForm">
-    <fieldset>
+<div style="padding: 20px">
+    <form ng-submit="register(userData)" name="registerForm">
+        <fieldset>
 
-        <legend>Register</legend>
-        <div>
-            <label for="reg-username">Username</label>
-            <input class="form-control" id="reg-username" type="text" ng-model="userData.username" required/>
-        </div>
-        <div>
-            <label for="reg-pass">Password</label>
-            <input class="form-control" id="reg-pass" type="password" ng-model="userData.password" ng-minlength="6"
-                   required/>
-        </div>
-        <div>
-            <label for="confirm-reg-pass">Confirm Password</label>
-            <input class="form-control" id="confirm-reg-pass" type="password" ng-model="userData.confirmPassword"
-                   compare-to="userData.password" required/>
-        </div>
-        <div>
-            <label for="name">Name</label>
-            <input class="form-control" id="name" type="text" ng-model="userData.name" required/>
-        </div>
-        <div>
-            <label for="email">Email</label>
-            <input class="form-control" id="email" type="email" ng-model="userData.email"
-                   placeholder="example@yahoo.com" required/>
-        </div>
-        <div>
-            <label>Gender</label>
+            <legend>Register</legend>
+            <div>
+                <label for="reg-username">Username</label>
+                <input class="form-control" id="reg-username" type="text" ng-model="userData.username" required style="width: 20%"/>
+            </div>
+            <div>
+                <label for="reg-pass">Password</label>
+                <input class="form-control" id="reg-pass" type="password" ng-model="userData.password" ng-minlength="6" required style="width: 20%"/>
+            </div>
+            <div>
+                <label for="confirm-reg-pass">Confirm Password</label>
+                <input class="form-control" id="confirm-reg-pass" type="password" ng-model="userData.confirmPassword" compare-to="userData.password" required style="width: 20%"/>
+            </div>
+            <div>
+                <label for="name">Name</label>
+                <input class="form-control" id="name" type="text" ng-model="userData.name" required style="width: 20%"/>
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input class="form-control" id="email" type="email" ng-model="userData.email" placeholder="example@yahoo.com" required style="width: 20%"/>
+            </div>
+            <div>
+                <label>Gender</label>
+                <br/>
+
+                <div class="inline">
+                    <label for="male">Male</label>
+                    <input type="radio" ng-model="userData.gender" id="male" name="gender" ng-value="1" required/>
+                </div>
+                <div class="inline">
+                    <label for="female">Female</label>
+                    <input type="radio" ng-model="userData.gender" id="female" name="gender" ng-value="2" required/>
+                </div>
+                <div class="inline">
+                    <label for="other">Other</label>
+                    <input type="radio" ng-model="userData.gender" id="other" name="gender" ng-value="3" required/>
+                </div>
+            </div>
             <br/>
 
-            <div class="inline">
-                <label for="male">Male</label>
-                <input type="radio" ng-model="userData.gender" id="male" name="gender" ng-value="1" required/>
-            </div>
-            <div class="inline">
-                <label for="female">Female</label>
-                <input type="radio" ng-model="userData.gender" id="female" name="gender" ng-value="2" required/>
-            </div>
-            <div class="inline">
-                <label for="other">Other</label>
-                <input type="radio" ng-model="userData.gender" id="other" name="gender" ng-value="3" required/>
-            </div>
-        </div>
-        <br/>
+            <button type="submit" class="btn btn-default" ng-disabled="registerForm.$invalid">Register</button>
+            <span>or</span>
+            <a href="#/login">
+                <button class="btn btn-default">Login</button>
+            </a>
 
-        <button type="submit" class="btn btn-default" ng-disabled="registerForm.$invalid">Register</button>
-        <span>or</span>
-        <a href="#/login">
-            <button class="btn btn-default">Login</button>
-        </a>
-
-    </fieldset>
-</form>
+        </fieldset>
+    </form>
+</div>

@@ -1,14 +1,14 @@
 <div ng-init="getRooms()">
-    <form ng-submit="addRoom(room.Name)">
-        <textarea id="room.Name" ng-model="room.Name" placeholder="room name"></textarea>
-        <button id="addRoomButton" type="submit">Add Room</button>
+    <form name="addRoomForm" ng-submit="addRoom(room.Name)" style="padding: 20px">
+        <input type="text" class="form-control" id="room.Name" ng-model="room.Name" placeholder="Enter room name" required style="width: 20%; display: inline-block"/>
+        <button id="addRoomButton" class="btn btn-default" type="submit" ng-disabled="addRoomForm.$invalid">Add Room</button>
     </form>
     <ul>
         <li ng-repeat="room in roomsList">
-            <a href="" ng-click="joinRoom(room)">
+            <button type="button" class="btn btn-default" ng-click="joinRoom(room)">
                 {{room.Name}} - {{room.MembersCount}} Members
-            </a>
-            <button ng-click="deleteRoom(room)">Delete Room</button>
+            </button>
+            <button class="btn btn-danger" ng-click="deleteRoom(room)">Delete Room</button>
         </li>
     </ul>
 </div>

@@ -1,8 +1,8 @@
 <!--<div ng-init="getLatestUsers(room.Id)">-->
     <!--<div ng-init="getLatestLeftUsers(room.Id)">-->
-<div ng-init="getRoomById()">
-    <h3>{{room.Name}}</h3>
-    <h4>{{room.MembersCount}} Members</h4>
+<div ng-init="getRoomById()" class="panel panel-default" style="margin: 20px; width: 250px;">
+    <div class="panel-heading" style="text-align: center">{{room.Name}} <span class="badge">{{room.MembersCount}}</span>
+    </div>
     <ul>
         <li ng-repeat="member in room.Members">
             <a href="">
@@ -14,19 +14,22 @@
     <!--</div>-->
 <!--</div>-->
 
-<div ng-controller="MessageController" ng-init="getLatestMessages()">
-    <a href="" ng-click="getAllMessages()">Get All Messages</a>
-
-    <form id="sendMessageForm" name="sendMessageForm" ng-submit="sendMessage(messageContent)">
-        <input id="messageContent" placeholder="Write a reply..."
-               ng-model="messageContent.Content" minlength="2" required />
-    </form>
-
+<div ng-controller="MessageController" ng-init="getLatestMessages()" style="margin: 20px; width: 300px" class="panel panel-default">
     <ul>
         <li class="message" ng-repeat="message in messages">
             <div>{{message.SenderName}} -
-            {{message.Content}}</div>
+                {{message.Content}}</div>
             <!--{{message.Date}}-->
         </li>
     </ul>
+
+    <a href="" ng-click="getAllMessages()">Get All Messages</a>
+
+    <form id="sendMessageForm" name="sendMessageForm" ng-submit="sendMessage(messageContent)" style="padding: 10px; display: inline-block">
+        <input class="form-control" id="messageContent" placeholder="Write a reply..."
+               ng-model="messageContent.Content" minlength="2" required/>
+    </form>
+
+    <!--<button ng-disabled="sendMessageForm.$invalid" type="submit" class="btn btn-default" style="display: inline-block">Send</button>-->
+
 </div>

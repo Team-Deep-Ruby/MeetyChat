@@ -1,4 +1,4 @@
-<div>
+<div style="padding: 20px">
     <form ng-submit="login(userData)" name="loginForm">
         <fieldset>
             <legend>
@@ -6,12 +6,11 @@
             </legend>
             <div>
                 <label for="log-username">Username</label>
-                <input class="form-control" id="log-username" type="text" ng-model="userData.username" required/>
+                <input class="form-control" id="log-username" type="text" ng-model="userData.username" required style="width: 20%"/>
             </div>
             <div>
                 <label for="log-pass">Password</label>
-                <input class="form-control" id="log-pass" type="password" ng-model="userData.password" ng-minlength="6"
-                       required/>
+                <input class="form-control" id="log-pass" type="password" ng-model="userData.password" ng-minlength="6" required style="width: 20%"/>
             </div>
             <br/>
 

@@ -1,11 +1,43 @@
 <div ng-if="!authService.isLoggedIn()">
-    <a href="#/login">Login</a>
-    <a href="#/register">Register</a>
+    <div style="padding: 20px">
+        <div>
+            <a href="#/login/">
+                <button type="button" class="btn btn-default">Login</button>
+            </a>
+            <span>or</span>
+            <a href="#/register/">
+                <button type="button" class="btn btn-default">Register</button>
+            </a>
+        </div>
+    </div>
 </div>
 
 <div ng-if="authService.isLoggedIn()">
-    <a href="#/profile">Edit Profile</a>
-    <a href="#/profile/changepassword">Change Password</a>
-    <a href="" ng-click="logout()" ng-controller="LogoutController">Logout</a>
-    <a href="#/rooms">Rooms</a>
+    <div class="nav" style="padding: 20px">
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                    aria-expanded="false">
+                <span class="glyphicon glyphicon-wrench"></span> Settings
+                <span class="caret"></span>
+            </button>
+
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#/profile">Edit Profile</a></li>
+                <li><a href="#/profile/changepassword">Change Password</a></li>
+            </ul>
+        </div>
+
+        <li style="display: inline-block">
+            <button type="button" class="btn btn-default">
+                <a href="#/rooms"><span class="glyphicon glyphicon-envelope"></span> Rooms</a>
+            </button>
+        </li>
+
+        <li style="display: inline-block">
+            <button type="button" class="btn btn-default" ng-click="logout()" ng-controller="LogoutController">
+                <span class="glyphicon glyphicon-log-out"></span> Logout
+            </button>
+        </li>
+
+    </div>
 </div>

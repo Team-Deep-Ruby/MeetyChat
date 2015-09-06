@@ -2,7 +2,7 @@
     <fieldset ng-init="getDataAboutMe()">
         <legend>Edit Profile</legend>
         <div>
-            <img id="uploadProfileImg" ng-src="{{userData.profileImage}}"
+            <img id="uploadProfileImg" ng-src="{{userData.profileImage || 'resources/defaultProfileImg.png'}}"
                  style="width: 150px; height: 150px">
         </div>
         <input type="file" name="upload" onchange="angular.element(this).scope().profilePicture(this)">

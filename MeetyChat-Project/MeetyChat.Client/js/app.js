@@ -3,7 +3,7 @@
 var meetyChatApp = angular
     .module('meetyChatApp', ['ngRoute', 'ui-notification'])
     .constant({
-        'BASE_URL': 'http://localhost:33257/api'
+        'BASE_URL': 'http://chattest2.cloudapp.net/api'
     })
     .config(function ($routeProvider) {
         $routeProvider

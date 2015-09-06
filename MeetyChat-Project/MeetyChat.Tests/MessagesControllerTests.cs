@@ -7,6 +7,7 @@
     using Models;
     using Services.Controllers;
     using System.Linq;
+    using System.Net;
     using System.Net.Http;
     using System.Threading;
     using System.Web.Http;
@@ -30,9 +31,9 @@
         [TestInitialize]
         public void Initialize()
         {
-            this.unitOfWorkMock = PublicMocks.GetUnitOfWorkMock();
+            this.unitOfWorkMock = new MeetyChatDataMock();
 
-            this.controller = new MessagesController(this.unitOfWorkMock, PublicMocks.GetUserIdProvider().Object);
+            this.controller = new MessagesController(this.unitOfWorkMock, UserIdProviderMock.GetUserIdProvider().Object);
             this.serializer = new JavaScriptSerializer();
             this.SetupController();
         }
@@ -43,13 +44,52 @@
             var httpResponse = this.controller.GetAllMessages(1).ExecuteAsync(new CancellationToken()).Result;
 
             var serverResponseJson = httpResponse.Content.ReadAsStringAsync().Result;
-            var messages = this.serializer.Deserialize<IList<MessageOutputModel>>(serverResponseJson);
-            var newMessagesJson = serializer.Serialize(messages);
 
-            var expectedResult = GetExpectedMessagesResult();
-            var json = serializer.Serialize(expectedResult);
+            Assert.AreEqual(HttpStatusCode.OK, httpResponse.StatusCode);
 
-            Assert.AreEqual(json, newMessagesJson);
+            var messages = this.serializer.Deserialize<IList<MessageOutputModel>>(serverResponseJson)
+                .Select(m => m.Id)
+                .ToList();
+
+            var expectedResult = GetExpectedMessagesResult()
+                .Select(m => m.Id)
+                .ToList();
+
+            CollectionAssert.AreEqual(expectedResult, messages);
+        }
+
+        [TestMethod]
+        public void GettingAllMessagesWithInvalidRoomIdShouldFail()
+        {
+            var httpResponse = this.controller.GetAllMessages(5).ExecuteAsync(new CancellationToken()).Result;
+
+            var serverResponseJson = httpResponse.Content.ReadAsStringAsync().Result;
+
+            Assert.AreEqual(HttpStatusCode.BadRequest, httpResponse.StatusCode);
+
+            Assert.AreEqual("{\"Message\":\"Invalid room id\"}", serverResponseJson);
+        }
+
+        [TestMethod]
+        public void GettingAllMessagesForEmptyRoomShouldReturnZeroMessages()
+        {
+            this.unitOfWorkMock.Rooms.Add(new Room()
+            {
+                Id = 5,
+                Name = "Room 5",
+                Messages = new Message[0]
+            });
+
+            var httpResponse = this.controller.GetAllMessages(5).ExecuteAsync(new CancellationToken()).Result;
+
+            var serverResponseJson = httpResponse.Content.ReadAsStringAsync().Result;
+
+            Assert.AreEqual(HttpStatusCode.OK, httpResponse.StatusCode);
+
+            var messagesCount = this.serializer.Deserialize<IList<MessageOutputModel>>(serverResponseJson)
+                .Count;
+
+            Assert.AreEqual(0, messagesCount);
         }
 
         [TestMethod]
@@ -66,7 +106,7 @@
                 Date = DateTime.Now,
                 Id = 4,
                 RoomId = 1,
-                SenderId = PublicMocks.MockUserId
+                SenderId = MeetyChatDataMock.MockUserId
             };
 
             var httpResponse = this.controller.AddMessage(1, message).ExecuteAsync(new CancellationToken()).Result;
@@ -75,13 +115,86 @@
 
             Assert.AreEqual(serverResponse, "\"Message created successfully\"");
 
-            var getAllMessagesResponse = this.controller.GetAllMessages(1).ExecuteAsync(new CancellationToken()).Result;
-
-            var getAllMessagesJson = getAllMessagesResponse.Content.ReadAsStringAsync().Result;
-            var messages = this.serializer.Deserialize<IList<MessageOutputModel>>(getAllMessagesJson);
-
             Assert.AreEqual(expectedMessage.Content, this.unitOfWorkMock.Messages.All().Last().Content);
         }
+
+        [TestMethod]
+        public void AddingMessageWithInvalidRoomIdShouldFail()
+        {
+            var message = new MessageInputModel()
+            {
+                Content = "New message"
+            };
+
+            var httpResponse = this.controller.AddMessage(5, message).ExecuteAsync(new CancellationToken()).Result;
+
+            var serverResponse = httpResponse.Content.ReadAsStringAsync().Result;
+
+            Assert.AreEqual("{\"Message\":\"Invalid room id\"}", serverResponse);
+
+            Assert.AreEqual(HttpStatusCode.BadRequest, httpResponse.StatusCode);
+        }
+
+        [TestMethod]
+        public void GettingLatestMessagesWithInvalidRoomIdShouldFail()
+        {
+            var httpResponse = this.controller
+                .GetLatestMessages(5)
+                .ExecuteAsync(new CancellationToken()).Result;
+
+            var serverResponse = httpResponse.Content
+                .ReadAsStringAsync().Result;
+
+            Assert.AreEqual("{\"Message\":\"Invalid room id\"}", serverResponse);
+
+            Assert.AreEqual(HttpStatusCode.BadRequest, httpResponse.StatusCode);
+        }
+
+        /*
+        [TestMethod]
+        public void GettingLatestMessagesShouldReturnLatestMessages()
+        {
+            var message = new MessageInputModel()
+            {
+                Content = "New message"
+            };
+
+            var addMessageResponse = this.controller.AddMessage(1, message).ExecuteAsync(new CancellationToken());
+
+            var httpResponseTask = this.controller
+                    .GetLatestMessages(1)
+                    .ExecuteAsync(new CancellationToken()).Result;
+
+            var httpResponse = httpResponseTask;
+
+            Assert.AreEqual(HttpStatusCode.OK, httpResponse.StatusCode);
+
+            var serverResponse = httpResponse.Content
+                .ReadAsStringAsync().Result;
+
+            var messageId = this.serializer.Deserialize<IList<MessageOutputModel>>(serverResponse)
+                .Select(m => m.Id)
+                .FirstOrDefault();
+
+            Assert.AreEqual(messageId, this.unitOfWorkMock.Messages.All().Last().Id);
+        }
+        */
+
+        /*
+        [TestMethod]
+        public void AddingMessageWithInvalidInputModelShouldFail()
+        {
+            var message = new MessageInputModel();
+
+            var httpResponse = this.controller.AddMessage(1, message).ExecuteAsync(new CancellationToken()).Result;
+
+            var serverResponse = httpResponse.Content.ReadAsStringAsync().Result;
+
+            Assert.AreEqual(serverResponse, "\"Invalid input model\"");
+
+            Assert.AreEqual(httpResponse.StatusCode, HttpStatusCode.BadRequest);
+        }
+        */
 
         private void SetupController()
         {
@@ -105,7 +218,7 @@
                     Id = 3,
                     Content = "Message 3",
                     Date = new DateTime(2015, 3, 2),
-                    SenderId = PublicMocks.MockUserId,
+                    SenderId = MeetyChatDataMock.MockUserId,
                     RoomId = 1
                 },
                 new MessageOutputModel()
@@ -113,7 +226,7 @@
                     Id = 2,
                     Content = "Message 2",
                     Date = new DateTime(2014, 4, 9),
-                    SenderId = PublicMocks.MockUserId,
+                    SenderId = MeetyChatDataMock.MockUserId,
                     RoomId = 1
                 },
                 new MessageOutputModel()
@@ -121,7 +234,7 @@
                     Id = 1,
                     Content = "Message 1",
                     Date = new DateTime(2010, 5, 5),
-                    SenderId = PublicMocks.MockUserId,
+                    SenderId = MeetyChatDataMock.MockUserId,
                     RoomId = 1
                 }
             };

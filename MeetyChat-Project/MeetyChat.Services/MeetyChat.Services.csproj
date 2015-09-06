@@ -280,6 +280,7 @@
     <Compile Include="Models\RoomBindingModel.cs" />
     <Compile Include="Models\Rooms\RoomListViewModel.cs" />
     <Compile Include="Models\Rooms\RoomViewModel.cs" />
+    <Compile Include="Models\UserOutputModel.cs" />
     <Compile Include="Models\Users\ChangePasswordBindingModel.cs" />
     <Compile Include="Models\Users\EditUserBindingModel.cs" />
     <Compile Include="Models\Users\LoginBindingModel.cs" />

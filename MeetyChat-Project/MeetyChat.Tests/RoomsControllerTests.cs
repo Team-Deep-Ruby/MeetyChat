@@ -1,6 +1,8 @@
 ﻿namespace MeetyChat.Tests
 {
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Net;
     using System.Net.Http;
     using System.Threading;
     using System.Web.Http;
@@ -10,7 +12,9 @@
     using System.Web.Script.Serialization;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Mocks;
+    using Models;
     using Services.Controllers;
+    using Services.Models;
     using Services.Models.Rooms;
 
     [TestClass]
@@ -23,9 +27,9 @@
         [TestInitialize]
         public void Initialize()
         {
-            this.unitOfWork = PublicMocks.GetUnitOfWorkMock();
+            this.unitOfWork = new MeetyChatDataMock();
 
-            this.controller = new RoomsController(this.unitOfWork, PublicMocks.GetUserIdProvider().Object);
+            this.controller = new RoomsController(this.unitOfWork, UserIdProviderMock.GetUserIdProvider().Object);
             this.serializer = new JavaScriptSerializer();
             this.SetupController();
         }
@@ -43,6 +47,113 @@
             var expectedJson = this.serializer.Serialize(expectedResult);
 
             Assert.AreEqual(expectedJson, responseRoomsJson);
+        }
+
+        [TestMethod]
+        public void GettingUsersByRoomShouldReturnUsers()
+        {
+            var roomUser =
+                this.unitOfWork.Rooms.All()
+                    .FirstOrDefault(r => r.Id == 1)
+                    .Members.First();
+
+            var httpResponse = this.controller.GetUsersByRoom(1).ExecuteAsync(CancellationToken.None).Result;
+
+            Assert.AreEqual(HttpStatusCode.OK, httpResponse.StatusCode);
+
+            var serverResponseJson = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var users = this.serializer.Deserialize<IList<UserOutputModel>>(serverResponseJson);
+
+            Assert.AreEqual(1, users.Count);
+            Assert.AreEqual(users.First().Id, roomUser.Id);
+        }
+
+        [TestMethod]
+        public void GettingUsersByRoomWithInvalidRoomIdShouldFail()
+        {
+            var httpResponse = this.controller.GetUsersByRoom(5).ExecuteAsync(CancellationToken.None).Result;
+
+            Assert.AreEqual(HttpStatusCode.BadRequest, httpResponse.StatusCode);
+
+            var serverResponseJson = httpResponse.Content.ReadAsStringAsync().Result;
+
+            Assert.AreEqual("{\"Message\":\"Invalid room id\"}", serverResponseJson);
+        }
+
+        [TestMethod]
+        public void GetRoomByIdShouldReturnRoom()
+        {
+            var expectedRoom = new RoomViewModel()
+            {
+                Name = "room 1"
+            };
+
+            var httpResponse = this.controller
+                .GetRoomById(1)
+                .ExecuteAsync(CancellationToken.None).Result;
+
+            Assert.AreEqual(HttpStatusCode.OK, httpResponse.StatusCode);
+
+            var serverResponseJson = httpResponse.Content.ReadAsStringAsync().Result;
+
+            var room = this.serializer.Deserialize<RoomViewModel>(serverResponseJson);
+
+            Assert.AreEqual(expectedRoom.Name, room.Name);
+        }
+
+        [TestMethod]
+        public void GetRoomByIdWhenRoomDoesNotExistShouldFail()
+        {
+            var httpResponse = this.controller
+                    .GetRoomById(5)
+                    .ExecuteAsync(CancellationToken.None).Result;
+
+            Assert.AreEqual(HttpStatusCode.BadRequest, httpResponse.StatusCode);
+
+            var serverResponseJson = httpResponse.Content.ReadAsStringAsync().Result;
+
+            Assert.AreEqual("{\"Message\":\"Such room does not exist\"}", serverResponseJson);
+        }
+
+        [TestMethod]
+        public void AddingRoomShouldAddRoom()
+        {
+            var room = new RoomBindingModel()
+            {
+                Name = "new room"
+            };
+
+            var httpResponse = this.controller.AddRoom(room)
+                .ExecuteAsync(CancellationToken.None).Result;
+
+            Assert.AreEqual(HttpStatusCode.OK, httpResponse.StatusCode);
+
+            var resultRoomName =
+                this.unitOfWork.Rooms.All()
+                .Select(r => r.Name)
+                .Last();
+
+            Assert.AreEqual(room.Name, resultRoomName);
+        }
+
+        [TestMethod]
+        public void DeleteRoomShouldDeleteRoom()
+        {
+            var room = this.unitOfWork.Rooms.All().First();
+            var initialRoomsCount =
+                this.unitOfWork.Rooms.All().Count();
+
+            var httpResponse = this.controller.DeleteRoom(1)
+                .ExecuteAsync(CancellationToken.None).Result;
+
+            Assert.AreEqual(HttpStatusCode.OK, httpResponse.StatusCode);
+
+            Assert.AreNotEqual(room.Id, 
+                this.unitOfWork.Rooms.All().First().Id);
+
+            Assert.AreEqual(initialRoomsCount - 1,
+                this.unitOfWork.Rooms.All().Count());
         }
 
         private void SetupController()

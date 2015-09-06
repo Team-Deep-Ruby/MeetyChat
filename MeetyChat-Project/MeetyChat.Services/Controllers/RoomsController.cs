@@ -8,6 +8,7 @@
     using MeetyChat.Models;
     using Models;
     using Models.Rooms;
+    using Ninject.Web.WebApi;
     using UserSessionUtils;
 
     [SessionAuthorize]
@@ -41,9 +42,9 @@
                 return this.BadRequest("Invalid room id");
             }
 
-            var members = room.Members.Select(m => new
+            var members = room.Members.Select(m => new UserOutputModel()
             {
-                m.Id,
+                Id = m.Id,
                 Username = m.UserName
             }).AsQueryable();
 
@@ -161,7 +162,8 @@
         [Authorize]
         public IHttpActionResult DeleteRoom(int id)
         {
-            var room = this.data.Rooms.GetById(id);
+            var room = this.data.Rooms.All()
+                .FirstOrDefault(r => r.Id == id);
 
             if (room == null)
             {
@@ -181,8 +183,10 @@
         {
             var userId = this.provider.GetUserId();
 
-            var user = this.data.Users.GetById(userId);
-            var room = this.data.Rooms.GetById(id);
+            var user = this.data.Users.All()
+                .FirstOrDefault(u => u.Id == id.ToString());
+            var room = this.data.Rooms.All()
+                .FirstOrDefault(r => r.Id == id);
 
             RoomsJoiningHistory log = new RoomsJoiningHistory()
             {
@@ -209,8 +213,10 @@
         {
             var userId = this.provider.GetUserId();
 
-            var user = this.data.Users.GetById(userId);
-            var room = this.data.Rooms.GetById(id);
+            var user = this.data.Users.All()
+                .FirstOrDefault(u => u.Id == id.ToString());
+            var room = this.data.Rooms.All()
+                .FirstOrDefault(r => r.Id == id);
                 
             if (room == null)
             {

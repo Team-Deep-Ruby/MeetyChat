@@ -6,7 +6,8 @@
 
     using Data.Interfaces;
 
-    public class RepositoryMock<T> : IRepository<T> where T : class
+    public class RepositoryMock<T> : IRepository<T> 
+        where T : class
     {
         public IList<T> Entities
         {

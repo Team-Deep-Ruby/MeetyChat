@@ -28,7 +28,7 @@ meetyChatApp.factory('authService',
             isLogged : function () {
                 if (!this.isLoggedIn()) {
                     $location.path('/');
-                    Notification.info("Please log in.");
+                    Notification.info("Please login.");
                 }
             }
     }});

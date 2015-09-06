@@ -147,7 +147,6 @@
             return this.ResponseMessage(tokenServiceResponse);
         }
 
-
         // POST api/Account/Logout
         [Route("Logout")]
         public IHttpActionResult Logout()

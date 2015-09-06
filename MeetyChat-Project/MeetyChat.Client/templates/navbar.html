@@ -4,6 +4,8 @@
 </div>
 
 <div ng-if="authService.isLoggedIn()">
+    <a href="#/profile">Edit Profile</a>
+    <a href="#/profile/changepassword">Change Password</a>
     <a href="" ng-click="logout()" ng-controller="LogoutController">Logout</a>
     <a href="#/rooms">Rooms</a>
 </div>

@@ -1,0 +1,36 @@
+<form name="editProfileForm" ng-submit="editProfile(userData)">
+    <fieldset ng-init="getDataAboutMe()">
+        <legend>Edit Profile</legend>
+        <div>
+            <input type="file" name="upload" onchange="angular.element(this).scope().profilePicture(this)">
+            <img id="uploadProfileImg" ng-src="{{userData.profileImage}}"
+                 style="width: 150px; height: 150px">
+        </div>
+        <br/>
+
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" class="form-control input1" id="name" ng-model="userData.name" required/>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" class="form-control input1" id="email" ng-model="userData.email"
+                   placeholder="example@yahoo.com" required/>
+        </div>
+        <br/>
+
+        <div>
+            <label>Gender</label>
+            <input type="radio" name="gender" ng-model="userData.gender" ng-value="1"/>Male
+            <input type="radio" name="gender" ng-model="userData.gender" ng-value="2"/>Female
+            <input type="radio" name="gender" ng-model="userData.gender" ng-value="3"/>Other
+        </div>
+        <br/>
+
+        <button type="submit" class="btn btn-success" ng-disabled="editProfileForm.$invalid">Edit Profile</button>
+        <a href="#/">
+            <button type="button" class="btn btn-default">Cancel</button>
+        </a>
+
+    </fieldset>
+</form>

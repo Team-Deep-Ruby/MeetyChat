@@ -19,7 +19,7 @@
 
         public string Name { get; set; }
 
-        public string ProfileDataPicture { get; set; }
+        public string ProfileImage { get; set; }
 
         public Gender Gender { get; set; }
 

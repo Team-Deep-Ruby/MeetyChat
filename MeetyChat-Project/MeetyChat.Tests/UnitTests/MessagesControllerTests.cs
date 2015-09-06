@@ -1,7 +1,6 @@
-﻿namespace MeetyChat.Tests
+﻿namespace MeetyChat.Tests.UnitTests
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Models;
@@ -15,9 +14,7 @@
     using System.Web.Http.Hosting;
     using System.Web.Http.Routing;
     using System.Web.Script.Serialization;
-    using Data.Interfaces;
     using Mocks;
-    using Moq;
     using Services.Models;
     using Services.Models.InputModels;
 

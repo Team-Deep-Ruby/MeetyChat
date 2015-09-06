@@ -277,6 +277,7 @@
     <Compile Include="Models\InputModels\MessageInputModel.cs" />
     <Compile Include="Models\MessageOutputModel.cs" />
     <Compile Include="Models\Messages\MessageViewModel.cs" />
+    <Compile Include="Models\ProfileViewModel.cs" />
     <Compile Include="Models\RoomBindingModel.cs" />
     <Compile Include="Models\Rooms\RoomListViewModel.cs" />
     <Compile Include="Models\Rooms\RoomViewModel.cs" />

@@ -4,9 +4,12 @@
     using System.Threading.Tasks;
     using System.Web.Http;
     using Data.Data;
+    using Data.Interfaces;
+    using Infrastructure;
     using MeetyChat.Models;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
+    using Models;
     using Models.Users;
     using UserSessionUtils;
 
@@ -15,11 +18,19 @@
     public class ProfileController : BaseApiController
     {
         private readonly ApplicationUserManager userManager;
+        private readonly IUserIdProvider provider;
 
         public ProfileController()
         {
             this.userManager = new ApplicationUserManager(
                 new UserStore<ApplicationUser>(new MeetyChatDbContext()));
+        }
+
+        public ProfileController(IMeetyChatData data, 
+            IUserIdProvider provider) 
+            : base(data)
+        {
+            this.provider = provider;
         }
 
         public ApplicationUserManager UserManager
@@ -33,22 +44,23 @@
         [HttpGet]
         public IHttpActionResult GetProfileInfo()
         {
-            var userId = this.User.Identity.GetUserId();
+            var userId = this.provider.GetUserId();
             if (userId == null)
             {
                 return this.BadRequest("Invalid session token.");
             }
 
-            var user = this.data.Users.GetById(userId);
+            var user = this.data.Users.All()
+                .FirstOrDefault(u => u.Id == userId);
 
-            return this.Ok(new
+            return this.Ok(new ProfileViewModel()
             {
-                id = user.Id,
-                username = user.UserName,
-                name = user.Name,
-                email = user.Email,
-                profileImage = user.ProfileImage,
-                gender = user.Gender
+                Id = user.Id,
+                Username = user.UserName,
+                Name = user.Name,
+                Email = user.Email,
+                ProfileImage = user.ProfileImage,
+                Gender = user.Gender
             });
         }
 
@@ -61,7 +73,7 @@
             }
 
             // Validate the current user exists in the database
-            var currentUserId = this.User.Identity.GetUserId();
+            var currentUserId = this.provider.GetUserId();
             var currentUser = this.data.Users.All()
                 .FirstOrDefault(u => u.Id == currentUserId);
             if (currentUser == null)

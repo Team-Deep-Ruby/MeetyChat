@@ -156,6 +156,105 @@
                 this.unitOfWork.Rooms.All().Count());
         }
 
+        [TestMethod]
+        public void DeleteRoomWhenRoomDoesNotExistShouldFail()
+        {
+            var httpResponse = this.controller.DeleteRoom(5)
+                .ExecuteAsync(CancellationToken.None).Result;
+
+            Assert.AreEqual(HttpStatusCode.BadRequest, httpResponse.StatusCode);
+        }
+
+        [TestMethod]
+        public void JoinRoomShouldJoinRoom()
+        {
+            var initialMembersCount =
+                this.unitOfWork.Rooms.All()
+                    .FirstOrDefault(r => r.Id == 1)
+                    .Members.Count;
+
+            var httpResponse = this.controller.JoinRoom(1)
+                .ExecuteAsync(CancellationToken.None).Result;
+
+            Assert.AreEqual(HttpStatusCode.OK, httpResponse.StatusCode);
+
+            var resultMembersCount =
+                this.unitOfWork.Rooms.All()
+                    .FirstOrDefault(r => r.Id == 1)
+                    .Members.Count;
+
+            Assert.AreEqual(initialMembersCount + 1, resultMembersCount);
+
+            var joinedUser =
+                this.unitOfWork.Rooms.All()
+                    .FirstOrDefault(r => r.Id == 1)
+                    .Members.Last();
+
+            var expectedUser =
+                this.unitOfWork.Users.All()
+                    .First();
+
+            Assert.AreEqual(expectedUser, joinedUser);
+
+            var newLog = this.unitOfWork.RoomsJoiningHistory.All()
+                .Last();
+
+            Assert.AreEqual(expectedUser, newLog.User);
+        }
+
+        [TestMethod]
+        public void JoinRoomWhenRoomDoesNotExistShouldFail()
+        {
+            var httpResponse = this.controller.JoinRoom(5)
+                .ExecuteAsync(CancellationToken.None).Result;
+
+            Assert.AreEqual(HttpStatusCode.BadRequest, httpResponse.StatusCode);
+        }
+
+        [TestMethod]
+        public void LeaveRoomShouldLeaveRoom()
+        {
+            var joinRoomHttpResponse = 
+                this.controller.JoinRoom(1)
+                .ExecuteAsync(CancellationToken.None).Result;
+
+            Assert.AreEqual(HttpStatusCode.OK, joinRoomHttpResponse.StatusCode);
+
+            var initialMembersCount =
+                this.unitOfWork.Rooms.All()
+                    .FirstOrDefault(r => r.Id == 1)
+                    .Members.Count;
+
+            var leaveRoomHttpResponse = 
+                this.controller.LeaveRoom(1)
+                .ExecuteAsync(CancellationToken.None).Result;
+
+            Assert.AreEqual(HttpStatusCode.OK, leaveRoomHttpResponse.StatusCode);
+
+            var resultMembersCount =
+                this.unitOfWork.Rooms.All()
+                    .FirstOrDefault(r => r.Id == 1)
+                    .Members.Count;
+
+            Assert.AreEqual(initialMembersCount - 1,
+                resultMembersCount);
+
+            var newLog = this.unitOfWork.RoomsJoiningHistory.All()
+                .Last();
+
+            Assert.IsNotNull(newLog.LeftOn);
+        }
+
+        [TestMethod]
+        public void LeaveRoomWhenRoomDoesNotExistShouldFail()
+        {
+            var leaveRoomHttpResponse =
+                this.controller.LeaveRoom(5)
+                .ExecuteAsync(CancellationToken.None).Result;
+
+            Assert.AreEqual(HttpStatusCode.BadRequest, leaveRoomHttpResponse.StatusCode);
+        }
+
         private void SetupController()
         {
             var config = new HttpConfiguration();

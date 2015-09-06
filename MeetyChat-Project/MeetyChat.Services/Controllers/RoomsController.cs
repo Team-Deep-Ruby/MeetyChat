@@ -184,7 +184,7 @@
             var userId = this.provider.GetUserId();
 
             var user = this.data.Users.All()
-                .FirstOrDefault(u => u.Id == id.ToString());
+                .FirstOrDefault(u => u.Id == userId);
             var room = this.data.Rooms.All()
                 .FirstOrDefault(r => r.Id == id);
 
@@ -214,7 +214,7 @@
             var userId = this.provider.GetUserId();
 
             var user = this.data.Users.All()
-                .FirstOrDefault(u => u.Id == id.ToString());
+                .FirstOrDefault(u => u.Id == userId);
             var room = this.data.Rooms.All()
                 .FirstOrDefault(r => r.Id == id);
                 

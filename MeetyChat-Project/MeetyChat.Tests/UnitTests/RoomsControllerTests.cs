@@ -19,7 +19,7 @@
     [TestClass]
     public class RoomsControllerTests
     {
-        private RoomsController controller;
+        private PublicRoomsController controller;
         private JavaScriptSerializer serializer;
         private MeetyChatDataMock unitOfWork;
 
@@ -28,7 +28,7 @@
         {
             this.unitOfWork = new MeetyChatDataMock();
 
-            this.controller = new RoomsController(this.unitOfWork, UserIdProviderMock.GetUserIdProvider().Object);
+            this.controller = new PublicRoomsController(this.unitOfWork, UserIdProviderMock.GetUserIdProvider().Object);
             this.serializer = new JavaScriptSerializer();
             this.SetupController();
         }
@@ -52,7 +52,7 @@
         public void GettingUsersByRoomShouldReturnUsers()
         {
             var roomUser =
-                this.unitOfWork.Rooms.All()
+                this.unitOfWork.PublicRooms.All()
                     .FirstOrDefault(r => r.Id == 1)
                     .Members.First();
 
@@ -129,7 +129,7 @@
             Assert.AreEqual(HttpStatusCode.OK, httpResponse.StatusCode);
 
             var resultRoomName =
-                this.unitOfWork.Rooms.All()
+                this.unitOfWork.PublicRooms.All()
                 .Select(r => r.Name)
                 .Last();
 
@@ -139,20 +139,20 @@
         [TestMethod]
         public void DeleteRoomShouldDeleteRoom()
         {
-            var room = this.unitOfWork.Rooms.All().First();
+            var room = this.unitOfWork.PublicRooms.All().First();
             var initialRoomsCount =
-                this.unitOfWork.Rooms.All().Count();
+                this.unitOfWork.PublicRooms.All().Count();
 
             var httpResponse = this.controller.DeleteRoom(1)
                 .ExecuteAsync(CancellationToken.None).Result;
 
             Assert.AreEqual(HttpStatusCode.OK, httpResponse.StatusCode);
 
-            Assert.AreNotEqual(room.Id, 
-                this.unitOfWork.Rooms.All().First().Id);
+            Assert.AreNotEqual(room.Id,
+                this.unitOfWork.PublicRooms.All().First().Id);
 
             Assert.AreEqual(initialRoomsCount - 1,
-                this.unitOfWork.Rooms.All().Count());
+                this.unitOfWork.PublicRooms.All().Count());
         }
 
         [TestMethod]
@@ -168,7 +168,7 @@
         public void JoinRoomShouldJoinRoom()
         {
             var initialMembersCount =
-                this.unitOfWork.Rooms.All()
+                this.unitOfWork.PublicRooms.All()
                     .FirstOrDefault(r => r.Id == 1)
                     .Members.Count;
 
@@ -178,14 +178,14 @@
             Assert.AreEqual(HttpStatusCode.OK, httpResponse.StatusCode);
 
             var resultMembersCount =
-                this.unitOfWork.Rooms.All()
+                this.unitOfWork.PublicRooms.All()
                     .FirstOrDefault(r => r.Id == 1)
                     .Members.Count;
 
             Assert.AreEqual(initialMembersCount + 1, resultMembersCount);
 
             var joinedUser =
-                this.unitOfWork.Rooms.All()
+                this.unitOfWork.PublicRooms.All()
                     .FirstOrDefault(r => r.Id == 1)
                     .Members.Last();
 
@@ -220,7 +220,7 @@
             Assert.AreEqual(HttpStatusCode.OK, joinRoomHttpResponse.StatusCode);
 
             var initialMembersCount =
-                this.unitOfWork.Rooms.All()
+                this.unitOfWork.PublicRooms.All()
                     .FirstOrDefault(r => r.Id == 1)
                     .Members.Count;
 
@@ -231,7 +231,7 @@
             Assert.AreEqual(HttpStatusCode.OK, leaveRoomHttpResponse.StatusCode);
 
             var resultMembersCount =
-                this.unitOfWork.Rooms.All()
+                this.unitOfWork.PublicRooms.All()
                     .FirstOrDefault(r => r.Id == 1)
                     .Members.Count;
 

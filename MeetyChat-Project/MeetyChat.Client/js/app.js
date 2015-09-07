@@ -3,7 +3,7 @@
 var meetyChatApp = angular
     .module('meetyChatApp', ['ngRoute', 'ui-notification'])
     .constant({
-        'BASE_URL': 'http://chattest2.cloudapp.net/api'
+        'BASE_URL': 'http://localhost:33257/api'
     })
     .config(function ($routeProvider) {
         $routeProvider
@@ -42,9 +42,6 @@ var meetyChatApp = angular
                         if ($routeParams.id) {
                             roomsService.leaveRoom($routeParams.id)
                         }
-                    },
-                    getRooms: function (authService, roomsService) {
-                        return roomsService.getAllRooms();
                     }
                 }
             })
@@ -54,9 +51,15 @@ var meetyChatApp = angular
                 resolve : {
                     isLogged: function (authService) {
                         authService.isLogged();
-                    },
-                    getRooms: function (authService, roomsService, $route) {
-                        return roomsService.getRoomById($route.current.params.id);
+                    }
+                }
+            })
+            .when('/privateRooms/:id', {
+                templateUrl: 'templates/privateRoom.html',
+                controller: 'RoomsController',
+                resolve : {
+                    isLogged: function (authService) {
+                        authService.isLogged();
                     }
                 }
             })

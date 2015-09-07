@@ -1,13 +1,6 @@
-<div ng-init="getRoomById()" class="panel panel-default" style="margin: 20px; width: 250px;">
-    <div class="panel-heading" style="text-align: center">{{room.Name}} <span class="badge">{{room.MembersCount}}</span>
+<div ng-init="getPrivateRoomById()" class="panel panel-default" style="margin: 20px; width: 250px;">
+    <div class="panel-heading" style="text-align: center">{{username}}
     </div>
-    <ul>
-        <li ng-repeat="member in room.Members">
-            <a href="" ng-click="addPrivateRoom(member.Name)">
-                {{member.Name}}
-            </a>
-        </li>
-    </ul>
 </div>
 
 <div ng-controller="MessageController" ng-init="getLatestMessages()" style="margin: 20px; width: 300px" class="panel panel-default">

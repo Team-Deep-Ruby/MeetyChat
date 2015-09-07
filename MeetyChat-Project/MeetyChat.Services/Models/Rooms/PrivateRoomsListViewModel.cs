@@ -4,24 +4,20 @@
     using System.Linq.Expressions;
     using MeetyChat.Models;
 
-    public class RoomListViewModel
+    public class PrivateRoomsListViewModel
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public int MembersCount { get; set; }
-
-
-        public static Expression<Func<PublicRoom, RoomListViewModel>> Create
+        public static Expression<Func<PrivateRoom, PrivateRoomsListViewModel>> Create
         {
             get
             {
-                return r => new RoomListViewModel
+                return r => new PrivateRoomsListViewModel
                 {
                     Id = r.Id,
-                    Name = r.Name,
-                    MembersCount = r.Members.Count,
+                    Name = r.Name
                 };
             }
         }

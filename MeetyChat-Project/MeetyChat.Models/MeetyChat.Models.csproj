@@ -57,7 +57,9 @@
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="Gender.cs" />
     <Compile Include="Message.cs" />
+    <Compile Include="PrivateRoom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublicRoom.cs" />
     <Compile Include="Room.cs" />
     <Compile Include="RoomsJoiningHistory.cs" />
     <Compile Include="UserSession.cs" />

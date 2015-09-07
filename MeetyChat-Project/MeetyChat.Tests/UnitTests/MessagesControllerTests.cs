@@ -70,7 +70,7 @@
         [TestMethod]
         public void GettingAllMessagesForEmptyRoomShouldReturnZeroMessages()
         {
-            this.unitOfWorkMock.Rooms.Add(new Room()
+            this.unitOfWorkMock.PublicRooms.Add(new PublicRoom
             {
                 Id = 5,
                 Name = "Room 5",

@@ -12,7 +12,8 @@
         public const string MockUserId = "UserIdMock";
 
         private IRepository<ApplicationUser> users;
-        private IRepository<Room> rooms;
+        private IRepository<PublicRoom> rooms;
+        private IRepository<PrivateRoom> privateRooms;
         private IRepository<Message> messages;
         private IRepository<RoomsJoiningHistory> history;
         private IRepository<UserSession> sessions; 
@@ -20,7 +21,7 @@
         public MeetyChatDataMock()
         {
             this.users = new RepositoryMock<ApplicationUser>();
-            this.rooms = new RepositoryMock<Room>();
+            this.rooms = new RepositoryMock<PublicRoom>();
             this.messages = new RepositoryMock<Message>();
             this.history = new RepositoryMock<RoomsJoiningHistory>();
             this.sessions = new RepositoryMock<UserSession>();
@@ -37,9 +38,14 @@
             get { return this.users; }
         }
 
-        public IRepository<Room> Rooms
+        public IRepository<PublicRoom> PublicRooms
         {
             get { return this.rooms; }
+        }
+
+        public IRepository<PrivateRoom> PrivateRooms
+        {
+            get { return this.privateRooms; }
         }
 
         public IRepository<Message> Messages
@@ -97,25 +103,25 @@
             };
         }
 
-        public static IList<Room> GetMockedRoomsList()
+        public static IList<PublicRoom> GetMockedRoomsList()
         {
-            return new List<Room>()
+            return new List<PublicRoom>()
             {
-                new Room()
+                new PublicRoom()
                 {
                     Id = 1,
                     Name = "room 1",
                     Members = new List<ApplicationUser>(){GetMockedUser()},
                     Messages = GetMockedMessagesList()
                 },
-                new Room()
+                new PublicRoom()
                 {
                     Id = 2,
                     Name = "room 2",
                     Members = new List<ApplicationUser>(){GetMockedUser()},
                     Messages = GetMockedMessagesList()
                 },
-                new Room()
+                new PublicRoom()
                 {
                     Id = 3,
                     Name = "room 3",
@@ -143,7 +149,7 @@
 
         private static void PopulateMockRooms(MeetyChatDataMock data)
         {
-            data.Rooms.Add(new Room()
+            data.PublicRooms.Add(new PublicRoom()
             {
                 Id = 1,
                 Name = "room 1",
@@ -151,7 +157,7 @@
                 Messages = data.Messages.All().ToList()
             });
 
-            data.Rooms.Add(new Room()
+            data.PublicRooms.Add(new PublicRoom()
             {
                 Id = 2,
                 Name = "room 2",
@@ -159,7 +165,7 @@
                 Messages = data.Messages.All().ToList()
             });
 
-            data.Rooms.Add(new Room()
+            data.PublicRooms.Add(new PublicRoom()
             {
                 Id = 3,
                 Name = "room 3",

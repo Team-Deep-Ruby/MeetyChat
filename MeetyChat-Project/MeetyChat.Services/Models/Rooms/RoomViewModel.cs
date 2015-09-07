@@ -18,7 +18,7 @@
 
         public IEnumerable<MembersViewModel> Members { get; set; } 
         
-        public static Expression<Func<Room, RoomViewModel>> Create
+        public static Expression<Func<PublicRoom, RoomViewModel>> Create
         {
             get
             {

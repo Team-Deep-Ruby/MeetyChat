@@ -1,25 +1,69 @@
 'use strict';
 
 meetyChatApp.controller('RoomsController',
-    function RoomsController($scope, $http, $route, $location, roomsService, $routeParams, Notification, getRooms, $timeout) {
+    function RoomsController($scope, $http, $route, $location, roomsService, $routeParams, Notification, $timeout, authService) {
 
-        if (getRooms) {
-            if (getRooms.length > 0){
-                $scope.roomsList = getRooms;
-            } else {
-                //$scope.room = getRooms;
-            }
-        }
+        $scope.getRooms = function () {
+            roomsService.getAllRooms()
+                .then(function (data) {
+                    $scope.roomsList = data;
+                    $timeout(function () {
+                        if ($route.current.$$route.originalPath == '/rooms'){
+                            $scope.getRooms();
+                            //$scope.getPrivateRooms();
+                        }
+                    }, 20000);
+                }, function (error) {
+                    Notification.error(error.Message);
+                })
+        };
+
+        $scope.getPrivateRooms = function () {
+            roomsService.getPrivateRooms()
+                .then(function (data) {
+                    var privateRoomsList = [];
+                    data.forEach(function (data) {
+                        data.Name = getPrivateRoomName(data);
+                        privateRoomsList.push(data);
+                    });
+                    $scope.privateRoomsList = privateRoomsList;
+                    $timeout(function () {
+                        if ($route.current.$$route.originalPath == '/rooms'){
+                            $scope.getPrivateRooms();
+                        }
+                    }, 20000);
+                }, function (error) {
+                    Notification.error(error.Message);
+                })
+        };
 
         $scope.getRoomById = function () {
             roomsService.getRoomById($routeParams.id)
                 .then(function (data) {
                     $scope.room = data;
-                    if ($route.current.$$route.originalPath == '/rooms/:id'){
-                        $timeout($scope.getRoomById, 20000);
-                    }
+                    $timeout(function () {
+                        if ($route.current.$$route.originalPath == '/rooms/:id'){
+                            $scope.getRoomById()
+                        }
+                    }, 20000);
+
                 }, function (error) {
-                    //Notification.error(error.Message)
+                    Notification.error(error.Message)
+                })
+        };
+
+        $scope.getPrivateRoomById = function () {
+            roomsService.getPrivateRoomById($routeParams.id)
+                .then(function (data) {
+                    $scope.username = getPrivateRoomName(data);
+                    $timeout(function () {
+                        if ($route.current.$$route.originalPath == '/privateRooms/:id'){
+                            $scope.getPrivateRoomById()
+                        }
+                    }, 20000);
+                }, function (error) {
+                    $location.path('/rooms');
+                    Notification.error(error.Message)
                 })
         };
 
@@ -49,11 +93,25 @@ meetyChatApp.controller('RoomsController',
 
             roomsService.addRoom(room)
                 .then(function (data) {
-                    $('#room').val('');
+                    $('#room.Name').val('');
                     $scope.roomsList.unshift(data);
                     Notification.success('Room successfully added.');
                 }, function (error) {
-                    $('#room').val('');
+                    $('#room.Name').val('');
+                    Notification.error(error.Message);
+                })
+        };
+
+        $scope.addPrivateRoom = function (memberName) {
+            var room = {
+                FirstUsername: this.authService.getCurrentUser().userName,
+                SecondUsername: memberName
+            };
+
+            roomsService.addPrivateRoom(room)
+                .then(function (data) {
+                    $location.path('/privateRooms/' + data);
+                }, function (error) {
                     Notification.error(error.Message);
                 })
         };
@@ -101,4 +159,13 @@ meetyChatApp.controller('RoomsController',
                     Notification.error(error.Message);
                 })
         };
+
+        var getPrivateRoomName = function (data) {
+            var usernames = data.Name.split(" ");
+            if (authService.getCurrentUser().userName == usernames[0]) {
+                return usernames[1];
+            } else {
+                return usernames[0];
+            }
+        }
     });

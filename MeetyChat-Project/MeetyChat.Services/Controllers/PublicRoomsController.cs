@@ -12,11 +12,11 @@
     using UserSessionUtils;
 
     [SessionAuthorize]
-    public class RoomsController : BaseApiController
+    public class PublicRoomsController : BaseApiController
     {
         private readonly IUserIdProvider provider;
 
-        public RoomsController(IMeetyChatData data, IUserIdProvider provider) 
+        public PublicRoomsController(IMeetyChatData data, IUserIdProvider provider) 
             : base(data)
         {
             this.provider = provider;
@@ -25,17 +25,17 @@
         [HttpGet]
         public IHttpActionResult GetAllRooms()
         {
-            var rooms = this.data.Rooms.All()
+            var rooms = this.data.PublicRooms.All()
                 .Select(RoomListViewModel.Create);
             
             return this.Ok(rooms);
         }
 
         [HttpGet]
-        [Route("api/rooms/{roomId}/users")]
+        [Route("api/publicRooms/{roomId}/users")]
         public IHttpActionResult GetUsersByRoom(int roomId)
         {
-            var room = this.data.Rooms.All().FirstOrDefault(r => r.Id == roomId);
+            var room = this.data.PublicRooms.All().FirstOrDefault(r => r.Id == roomId);
 
             if (room == null)
             {
@@ -52,13 +52,13 @@
         }
 
         [HttpGet]
-        [Route("api/rooms/{roomId}/users/latest/left")]
+        [Route("api/publicRooms/{roomId}/users/latest/left")]
         public IHttpActionResult GetUsersWhoLeftByRoom(int roomId)
         {
             DateTime date = DateTime.Now;
             TimeSpan timeout = new TimeSpan(0, 0, 2, 0); // 2 minutes timeout
 
-            var room = this.data.Rooms.All().FirstOrDefault(r => r.Id == roomId);
+            var room = this.data.PublicRooms.All().FirstOrDefault(r => r.Id == roomId);
 
             if (room == null)
             {
@@ -88,14 +88,14 @@
         }
 
         [HttpGet]
-        [Route("api/rooms/{roomId}/users/latest/joined")]
+        [Route("api/publicRooms/{roomId}/users/latest/joined")]
         public IHttpActionResult GetLatestUsersByRoom(int roomId)
         {
 
             DateTime date = DateTime.Now;
             TimeSpan timeout = new TimeSpan(0, 0, 2, 0); // 2 minutes timeout
 
-            var room = this.data.Rooms.All().FirstOrDefault(r => r.Id == roomId);
+            var room = this.data.PublicRooms.All().FirstOrDefault(r => r.Id == roomId);
 
             if (room == null)
             {
@@ -129,7 +129,7 @@
         [HttpGet]
         public IHttpActionResult GetRoomById(int id)
         {
-            var room = this.data.Rooms.All()
+            var room = this.data.PublicRooms.All()
                 .Select(RoomViewModel.Create)
                 .FirstOrDefault(r => r.Id == id);
 
@@ -150,9 +150,9 @@
                 return this.BadRequest(this.ModelState);
             }
 
-            var room = new Room() {Name = model.Name};
+            var room = new PublicRoom {Name = model.Name};
 
-            this.data.Rooms.Add(room);
+            this.data.PublicRooms.Add(room);
             this.data.SaveChanges();
 
             return this.Ok(room);
@@ -162,7 +162,7 @@
         [Authorize]
         public IHttpActionResult DeleteRoom(int id)
         {
-            var room = this.data.Rooms.All()
+            var room = this.data.PublicRooms.All()
                 .FirstOrDefault(r => r.Id == id);
 
             if (room == null)
@@ -170,7 +170,7 @@
                 return this.BadRequest("Such room does not exist");
             }
 
-            this.data.Rooms.Delete(room);
+            this.data.PublicRooms.Delete(room);
             this.data.SaveChanges();
 
             return this.Ok("Room deleted successfully");
@@ -178,14 +178,14 @@
 
         [HttpPut]
         [Authorize]
-        [Route("api/rooms/{id}/join")]
+        [Route("api/publicRooms/{id}/join")]
         public IHttpActionResult JoinRoom(int id)
         {
             var userId = this.provider.GetUserId();
 
             var user = this.data.Users.All()
                 .FirstOrDefault(u => u.Id == userId);
-            var room = this.data.Rooms.All()
+            var room = this.data.PublicRooms.All()
                 .FirstOrDefault(r => r.Id == id);
 
             RoomsJoiningHistory log = new RoomsJoiningHistory()
@@ -208,14 +208,14 @@
 
         [HttpPut]
         [Authorize]
-        [Route("api/rooms/{id}/leave")]
+        [Route("api/publicRooms/{id}/leave")]
         public IHttpActionResult LeaveRoom(int id)
         {
             var userId = this.provider.GetUserId();
 
             var user = this.data.Users.All()
                 .FirstOrDefault(u => u.Id == userId);
-            var room = this.data.Rooms.All()
+            var room = this.data.PublicRooms.All()
                 .FirstOrDefault(r => r.Id == id);
                 
             if (room == null)

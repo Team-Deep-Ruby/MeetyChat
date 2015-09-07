@@ -3,3 +3,4 @@ obj/
 packages/
 Web.config
 .idea/
+MeetyChat.Client/.idea/

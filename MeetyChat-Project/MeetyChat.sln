@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetyChat.Models", "MeetyChat.Models\MeetyChat.Models.csproj", "{64A3C81A-B05D-45F9-A8A1-871D246ECFA0}"
 EndProject
@@ -17,6 +17,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetyChat.Services", "MeetyChat.Services\MeetyChat.Services.csproj", "{CD3F3A42-7EA1-4B79-A191-8B3C7D7C3097}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetyChat.Tests", "MeetyChat.Tests\MeetyChat.Tests.csproj", "{06DB398C-B728-469A-96B0-6D6FBB766FC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetyChat.Utils", "MeetyChat.Utils\MeetyChat.Utils.csproj", "{3C468C1D-CF12-40D4-8FE2-824FAC65826A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +42,10 @@ Global
 		{06DB398C-B728-469A-96B0-6D6FBB766FC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06DB398C-B728-469A-96B0-6D6FBB766FC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06DB398C-B728-469A-96B0-6D6FBB766FC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C468C1D-CF12-40D4-8FE2-824FAC65826A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C468C1D-CF12-40D4-8FE2-824FAC65826A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C468C1D-CF12-40D4-8FE2-824FAC65826A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C468C1D-CF12-40D4-8FE2-824FAC65826A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

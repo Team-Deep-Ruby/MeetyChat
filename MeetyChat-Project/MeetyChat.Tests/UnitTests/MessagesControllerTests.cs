@@ -14,6 +14,7 @@
     using System.Web.Http.Hosting;
     using System.Web.Http.Routing;
     using System.Web.Script.Serialization;
+    using MeetyChat.Models;
     using Mocks;
     using Services.Models;
     using Services.Models.InputModels;

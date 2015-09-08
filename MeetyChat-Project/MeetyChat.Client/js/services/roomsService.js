@@ -2,7 +2,10 @@
 
 meetyChatApp.factory('roomsService',
     function roomsService($http, $q, BASE_URL) {
+        var hasJoinedRoom = false;
+
         return {
+
             getAllRooms: function () {
                 var deferred = $q.defer();
                 $http.get(BASE_URL + '/publicRooms')
@@ -55,6 +58,7 @@ meetyChatApp.factory('roomsService',
                 var deferred = $q.defer();
                 $http.put(BASE_URL + '/publicRooms/' + room.Id + '/join')
                     .success(function (data) {
+                        hasJoinedRoom = true;
                         deferred.resolve(data);
                     })
                     .error(function (error) {
@@ -65,14 +69,17 @@ meetyChatApp.factory('roomsService',
 
             leaveRoom: function (id) {
                 var deferred = $q.defer();
-                $http.put(BASE_URL + '/publicRooms/' + id + '/leave')
-                    .success(function (data) {
-                        deferred.resolve(data);
-                    })
-                    .error(function (error) {
-                        deferred.reject(error)
-                    });
-                return deferred.promise;
+                if (hasJoinedRoom) {
+                    $http.put(BASE_URL + '/publicRooms/' + id + '/leave')
+                        .success(function (data) {
+                            hasJoinedRoom = false;
+                            deferred.resolve(data);
+                        })
+                        .error(function (error) {
+                            deferred.reject(error)
+                        });
+                    return deferred.promise;
+                }
             },
 
             addRoom: function (roomModel) {

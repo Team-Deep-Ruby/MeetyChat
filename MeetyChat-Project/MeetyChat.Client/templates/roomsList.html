@@ -23,3 +23,15 @@
         </li>
     </ul>
 </div>
+
+
+<div ng-controller="UsersController" ng-init="getOnlineUsers()">
+    <h5>Online Users</h5>
+    <ul>
+        <li ng-repeat="user in onlineUsers">
+            <a href="" ng-click="addPrivateRoom(user.Name)">
+                {{user.Name}}
+            </a>
+        </li>
+    </ul>
+</div>

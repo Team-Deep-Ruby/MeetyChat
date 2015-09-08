@@ -8,7 +8,7 @@ meetyChatApp.controller('ProfileController',
                 .then(function (data) {
                     $scope.userData = data;
                 }, function error(error) {
-                    Notification.error(error.err_description);
+                    Notification.error(error.Message);
                 }
             )
         };
@@ -20,7 +20,7 @@ meetyChatApp.controller('ProfileController',
                         Notification.success('Successfully edited profile!');
                         $location.path('/');
                     }, function error(error) {
-                        Notification.error(error.error_description);
+                        Notification.error(error.Message);
                     }
                 )
             }
@@ -33,7 +33,7 @@ meetyChatApp.controller('ProfileController',
                         Notification.success('Successfully changed password!');
                         $location.path('/');
                     }, function (error) {
-                        Notification.error(error.error_description);
+                        Notification.error(error.Message);
                     }
                 )
             }

@@ -25,11 +25,21 @@ var meetyChatApp = angular
             })
             .when('/profile', {
                 templateUrl: 'templates/profile.html',
-                controller: 'ProfileController'
+                controller: 'ProfileController',
+                resolve : {
+                    isLogged: function (authService) {
+                        authService.isLogged();
+                    }
+                }
             })
             .when('/profile/changepassword', {
                 templateUrl: 'templates/change-password.html',
-                controller: 'ProfileController'
+                controller: 'ProfileController',
+                resolve : {
+                    isLogged: function (authService) {
+                        authService.isLogged();
+                    }
+                }
             })
             .when('/rooms', {
                 templateUrl: 'templates/roomsList.html',

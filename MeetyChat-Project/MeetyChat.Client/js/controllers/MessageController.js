@@ -30,7 +30,7 @@ meetyChatApp.controller('MessageController',
                         $scope.hasMoreMessages = false;
                         Notification.info("No more messages.");
                     } else {
-                        $scope.hasMoreMessages = true;
+                        $scope.hasMoreMessages = false;
                     }
                 }, function (error){
                     Notification.error(error.Message);

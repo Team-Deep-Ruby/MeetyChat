@@ -10,6 +10,7 @@
     using System.Web.Http.Hosting;
     using System.Web.Http.Routing;
     using System.Web.Script.Serialization;
+    using MeetyChat.Models;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Mocks;
     using Models;

@@ -8,7 +8,7 @@ meetyChatApp.controller('RegisterController',
                 .then(function (data) {
                     authService.setCredentials(data);
                     Notification.success('Successfully registered!');
-                    $location.path('/');
+                    $location.path('/rooms');
                 }, function (error) {
                     console.log(error);
                     if (error.Message != 'The request is invalid.'){

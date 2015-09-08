@@ -8,7 +8,7 @@ meetyChatApp.controller('LoginController',
                 .then(function (data) {
                     authService.setCredentials(data);
                     Notification.success('Successfully logged in!');
-                    $location.path('/');
+                    $location.path('/rooms');
                 }, function (error) {
                     Notification.error(error.error_description);
                 })

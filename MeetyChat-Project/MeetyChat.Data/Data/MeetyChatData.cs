@@ -31,9 +31,14 @@
             get { return this.GetRepository<UserSession>(); }
         }
 
-        public IRepository<Room> Rooms
+        public IRepository<PublicRoom> PublicRooms
         {
-            get { return this.GetRepository<Room>(); }
+            get { return this.GetRepository<PublicRoom>(); }
+        }
+
+        public IRepository<PrivateRoom> PrivateRooms
+        {
+            get { return this.GetRepository<PrivateRoom>(); }
         }
 
         public IRepository<Message> Messages

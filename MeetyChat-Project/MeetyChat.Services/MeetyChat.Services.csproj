@@ -267,8 +267,10 @@
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Controllers\PrivateRoomsController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
-    <Compile Include="Controllers\RoomsController.cs" />
+    <Compile Include="Controllers\PublicRoomsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -277,9 +279,13 @@
     <Compile Include="Models\InputModels\MessageInputModel.cs" />
     <Compile Include="Models\MessageOutputModel.cs" />
     <Compile Include="Models\Messages\MessageViewModel.cs" />
+    <Compile Include="Models\ProfileViewModel.cs" />
     <Compile Include="Models\RoomBindingModel.cs" />
+    <Compile Include="Models\Rooms\PrivateRoomBindingModel.cs" />
+    <Compile Include="Models\Rooms\PrivateRoomsListViewModel.cs" />
     <Compile Include="Models\Rooms\RoomListViewModel.cs" />
     <Compile Include="Models\Rooms\RoomViewModel.cs" />
+    <Compile Include="Models\UserOutputModel.cs" />
     <Compile Include="Models\Users\ChangePasswordBindingModel.cs" />
     <Compile Include="Models\Users\EditUserBindingModel.cs" />
     <Compile Include="Models\Users\LoginBindingModel.cs" />

@@ -12,3 +12,14 @@
         </li>
     </ul>
 </div>
+
+<div ng-init="getPrivateRooms()">
+    <h5>Private Chats</h5>
+    <ul>
+        <li ng-repeat="room in privateRoomsList">
+            <a href="#/privateRooms/{{room.Id}}">
+                {{room.Name}}
+            </a>
+        </li>
+    </ul>
+</div>

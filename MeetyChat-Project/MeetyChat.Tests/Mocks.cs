@@ -6,6 +6,7 @@
     using System.Runtime.Remoting.Messaging;
     using Data.Data;
     using Data.Interfaces;
+    using MeetyChat.Models;
     using Mocks;
     using Models;
     using Moq;

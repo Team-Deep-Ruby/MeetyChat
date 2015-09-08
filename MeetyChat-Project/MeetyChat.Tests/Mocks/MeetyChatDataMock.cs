@@ -2,6 +2,7 @@
 {
     using Data.Data;
     using Data.Interfaces;
+    using MeetyChat.Models;
     using Models;
 
     public class MeetyChatDataMock : IMeetyChatData

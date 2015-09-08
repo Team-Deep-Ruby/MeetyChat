@@ -33,17 +33,16 @@
 				return this.BadRequest("Invalid room id");
 			}
 
-			var messages = room.Messages
-				.Select(m => new MessageOutputModel
-				{
-					Id = m.Id,
-					Content = m.Content,
-					Date = m.Date,
-					SenderName = m.Sender.Name,
-					RoomId = roomId
-				})
-				.OrderByDescending(m => m.Date)
-				.AsQueryable();
+		    var messages = room.Messages
+		        .Select(m => new MessageOutputModel
+		        {
+		            Id = m.Id,
+		            Content = m.Content,
+		            Date = m.Date,
+		            SenderName = m.Sender.Name,
+		            RoomId = roomId
+		        })
+		        .OrderByDescending(m => m.Date);
 			
 			return this.Ok(messages);
 		}

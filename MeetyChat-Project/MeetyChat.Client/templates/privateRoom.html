@@ -4,18 +4,25 @@
 </div>
 
 <div ng-controller="MessageController" ng-init="getLatestMessages()" style="margin: 20px; width: 300px" class="panel panel-default">
-    <ul>
-        <li class="message" ng-repeat="message in messages">
-            <div>{{message.SenderName}} -
-                {{message.Content}}</div>
-            <!--{{message.Date}}-->
-        </li>
-    </ul>
 
-    <a href="" ng-click="getAllMessages()">Get All Messages</a>
+    <div ng-init="getMessages()">
 
-    <form id="sendMessageForm" name="sendMessageForm" ng-submit="sendMessage(messageContent)" style="padding: 10px; display: inline-block">
-        <input class="form-control" id="messageContent" placeholder="Write a reply..."
-               ng-model="messageContent.Content" minlength="2" required/>
-    </form>
+        <div ng-show="hasMoreMessages">
+            <a href="" ng-click="getAllMessages()">Get All Messages</a>
+            <a href="" ng-click="getMessages()">Load more messages</a>
+        </div>
+
+        <ul>
+            <li class="message" ng-repeat="message in messages">
+                <div>{{message.SenderName}} -
+                    {{message.Content}}</div>
+                <!--{{message.Date}}-->
+            </li>
+        </ul>
+
+        <form id="sendMessageForm" name="sendMessageForm" ng-submit="sendMessage(messageContent)" style="padding: 10px; display: inline-block">
+            <input class="form-control" id="messageContent" placeholder="Write a reply..."
+                   ng-model="messageContent.Content" minlength="2" required/>
+        </form>
+    </div>
 </div>

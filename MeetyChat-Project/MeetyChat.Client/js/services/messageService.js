@@ -15,6 +15,18 @@ meetyChatApp.factory('messageService',
                 return deferred.promise;
             },
 
+            getMessages: function (id, top, skip) {
+                var deferred = $q.defer();
+                $http.get(BASE_URL + '/rooms/' + id + "/messages?$orderby=Date desc&$top=" + top + "&$skip=" + skip)
+                    .success(function (data) {
+                        deferred.resolve(data);
+                    })
+                    .error(function (error) {
+                        deferred.reject(error);
+                    });
+                return deferred.promise;
+            },
+
             getLatestMessages: function (id) {
                 var deferred = $q.defer();
                 $http.get(BASE_URL + '/rooms/' + id + "/messages/latest")

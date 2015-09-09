@@ -10,6 +10,7 @@
 	using MeetyChat.Models;
 	using Models;
 	using Models.InputModels;
+	using Models.Rooms;
 
 	public class MessagesController : BaseApiController
 	{
@@ -26,23 +27,23 @@
 		[Route("api/rooms/{roomId}/messages")]
 		public IHttpActionResult GetAllMessages(int roomId)
 		{
-			var room = GetRoomById(roomId) ?? GetPrivateRoomById(roomId);
+			var room = GetRoomById(roomId) ?? GetPrivateRoomById(roomId);  
 
 			if (room == null)
 			{
 				return this.BadRequest("Invalid room id");
 			}
 
-		    var messages = room.Messages
-		        .Select(m => new MessageOutputModel
-		        {
-		            Id = m.Id,
-		            Content = m.Content,
-		            Date = m.Date,
-		            SenderName = m.Sender.Name,
-		            RoomId = roomId
-		        })
-		        .OrderByDescending(m => m.Date);
+			var messages = room.Messages
+				.Select(m => new MessageOutputModel
+				{
+					Id = m.Id,
+					Content = m.Content,
+					Date = m.Date,
+					SenderName = m.Sender.Name,
+					RoomId = roomId
+				})
+				.OrderByDescending(m => m.Date);
 			
 			return this.Ok(messages);
 		}

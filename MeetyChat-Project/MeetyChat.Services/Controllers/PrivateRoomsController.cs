@@ -43,11 +43,7 @@
         public IHttpActionResult GetPrivateRoomById(int id)
         {
             var room = this.data.PrivateRooms.All()
-                .Select(r => new
-                {
-                    r.Name,
-                    r.Id
-                })
+                .Select(PrivateRoomsListViewModel.Create)
                 .FirstOrDefault(r => r.Id == id);
 
             if (room == null)

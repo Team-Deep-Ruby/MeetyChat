@@ -59,7 +59,7 @@
         [TestMethod]
         public void GettingAllMessagesWithInvalidRoomIdShouldFail()
         {
-            var httpResponse = this.controller.GetAllMessages(5).ExecuteAsync(new CancellationToken()).Result;
+            var httpResponse = this.controller.GetAllMessages(-1).ExecuteAsync(CancellationToken.None).Result;
 
             var serverResponseJson = httpResponse.Content.ReadAsStringAsync().Result;
 

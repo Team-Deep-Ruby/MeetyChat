@@ -23,6 +23,7 @@
         {
             this.users = new RepositoryMock<ApplicationUser>();
             this.rooms = new RepositoryMock<PublicRoom>();
+            this.privateRooms = new Repository<PrivateRoom>();
             this.messages = new RepositoryMock<Message>();
             this.history = new RepositoryMock<RoomsJoiningHistory>();
             this.sessions = new RepositoryMock<UserSession>();

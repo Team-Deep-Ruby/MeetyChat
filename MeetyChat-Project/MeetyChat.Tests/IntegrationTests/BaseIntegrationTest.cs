@@ -16,8 +16,8 @@
     [TestClass]
     public class BaseIntegrationTest
     {
-        protected const string SeededUserUsername = "Batman";
-        protected const string SeededUserPassword = "superman";
+        protected const string SeededUserUsername = "qwerty";
+        protected const string SeededUserPassword = "qwerty";
         protected const string RegisterTestUsername = "FikretStoraro";
 
         protected TestServer httpTestServer;

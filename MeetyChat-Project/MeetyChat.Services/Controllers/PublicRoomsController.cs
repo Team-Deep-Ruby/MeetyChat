@@ -6,6 +6,7 @@
     using Data.Interfaces;
     using Infrastructure;
     using MeetyChat.Models;
+    using Microsoft.Ajax.Utilities;
     using Models;
     using Models.Rooms;
     using Ninject.Web.WebApi;
@@ -148,6 +149,14 @@
             if (!this.ModelState.IsValid)
             {
                 return this.BadRequest(this.ModelState);
+            }
+
+            var checkForExistingRoom = this.data.PublicRooms.All()
+                .FirstOrDefault(r => r.Name == model.Name);
+
+            if (checkForExistingRoom != null)
+            {
+                return this.BadRequest("The chat room name already exists.");
             }
 
             var room = new PublicRoom {Name = model.Name};

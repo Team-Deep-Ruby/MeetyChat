@@ -1,6 +1,7 @@
 ﻿namespace MeetyChat.Data.Data
 {
     using System.Data.Entity;
+    using System.Data.Entity.ModelConfiguration.Conventions;
     using Interfaces;
     using Migrations;
     using Models;

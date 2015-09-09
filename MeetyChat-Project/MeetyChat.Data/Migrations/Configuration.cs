@@ -19,52 +19,25 @@ namespace MeetyChat.Data.Migrations
 
         protected override void Seed(MeetyChatDbContext context)
         {
-            // Seed only if database is empty
-            //if (!context.Users.Any())
-            //{
-            //    var users = this.SeedApplicationUsers(context);
-            //}
+            if (!context.Users.Any())
+            {
+                this.SeedApplicationUsers(context);
+            }
         }
 
-        //private IList<ApplicationUser> SeedApplicationUsers(MeetyChatDbContext context)
-        //{
-        //    var users = new List<ApplicationUser>()
-        //    {
-        //        new ApplicationUser()
-        //        {
-        //            UserName = "Batman",
-        //            Name = "Bruce Wayne",
-        //            Email = "man@bat.bg"
-        //        }
-        //    };
+        private void SeedApplicationUsers(MeetyChatDbContext context)
+        {
+            var user = new ApplicationUser
+                {
+                    UserName = "qwerty",
+                    Name = "qwerty",
+                    Email = "qwerty@qwerty",
+                    PasswordHash = "ABOYgM+IChRPgbaPEHn+7+4xWX5fRptDfktaFOkAFNEXrwkcryiU19UwqjJiZj+IBw==",
+                    SecurityStamp = "fea5e506-178b-4674-84fb-6913845271c6"
+                };
 
-        //    var userStore = new UserStore<ApplicationUser>(context);
-        //    var userManager = new UserManager<ApplicationUser>(userStore)
-        //    {
-        //        PasswordValidator = new PasswordValidator
-        //        {
-        //            RequiredLength = 2,
-        //            RequireNonLetterOrDigit = false,
-        //            RequireDigit = false,
-        //            RequireLowercase = false,
-        //            RequireUppercase = false
-        //        }
-        //    };
-
-        //    foreach (var user in users)
-        //    {
-        //        var password = user.UserName;
-
-        //        var userCreateResult = userManager.Create(user, password);
-        //        if (!userCreateResult.Succeeded)
-        //        {
-        //            throw new Exception(string.Join(Environment.NewLine, userCreateResult.Errors));
-        //        }
-        //    }
-
-        //    context.SaveChanges();
-
-        //    return users;
-        //}
+            context.Users.Add(user);
+            context.SaveChanges();
+        }
     }
 }

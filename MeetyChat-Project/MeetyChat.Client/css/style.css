@@ -30,6 +30,13 @@ a:hover {
     margin: 0 auto;
 }
 
+.form1 {
+    width: 300px;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
 .form {
     padding-top: 20px;
 }
@@ -51,4 +58,8 @@ li {
 
 .message {
     padding: 5px;
+}
+
+.upload {
+    margin: 0 75px;
 }

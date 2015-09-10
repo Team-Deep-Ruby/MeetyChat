@@ -7,7 +7,6 @@ a:hover {
     color: black;
 }
 
-<<<<<<< HEAD
 .nav-bar {
     background-color: teal;
 }
@@ -35,11 +34,6 @@ a:hover {
     padding-top: 20px;
 }
 
-=======
-nav {
-    padding: 20px;
-}
-
 .sentImage {
     max-width: 100%;
     max-height: 75px;
@@ -58,4 +52,3 @@ li {
 .message {
     padding: 5px;
 }
->>>>>>> 6471e571fb3e1ea0dbbee7e683311b3f2f72fd02

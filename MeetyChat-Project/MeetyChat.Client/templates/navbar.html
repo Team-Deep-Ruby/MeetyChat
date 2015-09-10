@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div ng-if="!authService.isLoggedIn()" >
     <div class="center">
         <a href="#/login">
@@ -8,47 +7,7 @@
         <span>or</span>
         <a href="#/register">
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Register
-=======
-<div ng-if="!authService.isLoggedIn()">
-    <div style="padding: 20px">
-        <div>
-            <a href="#/login/">
-                <button type="button" class="btn btn-default">Login</button>
-            </a>
-            <span>or</span>
-            <a href="#/register/">
-                <button type="button" class="btn btn-default">Register</button>
-            </a>
-        </div>
-    </div>
-</div>
-
-<div ng-if="authService.isLoggedIn()">
-    <div class="nav" style="padding: 20px">
-        <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                    aria-expanded="false">
-                <span class="glyphicon glyphicon-wrench"></span> Settings
-                <span class="caret"></span>
-            </button>
-
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="#/profile">Edit Profile</a></li>
-                <li><a href="#/profile/changepassword">Change Password</a></li>
-            </ul>
-        </div>
-
-        <a href="#/rooms" style="display: inline-block">
-            <button type="button" class="btn btn-default">
-                <span class="glyphicon glyphicon-envelope"></span> Rooms
-            </button>
-        </a>
-
-        <li style="display: inline-block">
-            <button type="button" class="btn btn-default" ng-click="logout()" ng-controller="LogoutController">
-                <span class="glyphicon glyphicon-log-out"></span> Logout
->>>>>>> 6471e571fb3e1ea0dbbee7e683311b3f2f72fd02
-            </button>
-        </a>
-    </div>
+			</button>
+		</a>
+	</div>
 </div>

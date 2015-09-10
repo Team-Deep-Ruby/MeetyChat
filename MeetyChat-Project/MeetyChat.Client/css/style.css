@@ -10,3 +10,22 @@ a:hover {
 nav {
     padding: 20px;
 }
+
+.sentImage {
+    max-width: 100%;
+    max-height: 75px;
+    height: auto;
+}
+
+.profileImage {
+    max-width: 50px;
+    max-height: 50px;
+}
+
+li {
+    list-style:none;
+}
+
+.message {
+    padding: 5px;
+}

@@ -47,11 +47,10 @@ meetyChatApp.controller('ProfileController',
                 var reader = new FileReader();
                 reader.onload = function () {
                     $('#profileImgPreview').attr('src', reader.result);
-                    $scope.userData.NewProfileImage = reader.result;
+                    $scope.userData.ProfileImage = reader.result;
                 };
                 reader.readAsDataURL(file);
             } else if (file) {
-                $('#profileImgPreview').attr('src', $scope.userData.ProfileImage);
                 fileInputField.value = "";
                 file.size > sizeLimit ? Notification.info('Profile picture size limit is 128kb.') :
                     Notification.info('File not supported!');

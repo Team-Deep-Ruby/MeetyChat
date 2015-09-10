@@ -69,4 +69,33 @@ meetyChatApp.controller('MessageController',
         $scope.dateFromNow = function (date) {
             return moment(date).add(3, 'hours').fromNow();
         };
+
+        $scope.sendPicture = function (fileInputField) {
+
+            var sizeLimit = 512000;
+
+            var file = fileInputField.files[0];
+            if (file && file.type.match(/image\/.*/) && file.size < sizeLimit) {
+                var reader = new FileReader();
+
+                reader.onload = function () {
+                    var message = {
+                        Content: reader.result
+                    };
+
+                    messageService.sendMessage($routeParams.id, message)
+                        .then(function () {
+
+                            Notification.success('Picture successfully sent.');
+                        }, function (error) {
+                            Notification.error(error.message);
+                        })
+                };
+                reader.readAsDataURL(file);
+            } else {
+                file.size > sizeLimit ? Notification.info('Profile picture size limit is 512kb.') :
+                    Notification.info('File not supported!');
+            }
+            fileInputField.value = "";
+        };
     });

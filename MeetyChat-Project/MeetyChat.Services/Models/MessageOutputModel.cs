@@ -18,5 +18,7 @@
         public string Content { get; set; }
 
         public int RoomId { get; set; }
+
+        public string SenderProfilePicture { get; set; }
     }
 }

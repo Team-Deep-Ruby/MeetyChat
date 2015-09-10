@@ -1,18 +1,18 @@
 ﻿namespace MeetyChat.Services.Controllers
 {
-    using System;
-    using System.Linq;
-    using System.Threading;
-    using System.Web.Http;
-    using System.Web.OData;
-    using Data.Interfaces;
-    using Infrastructure;
-    using MeetyChat.Models;
-    using Models;
-    using Models.InputModels;
-    using UserSessionUtils;
+	using System;
+	using System.Linq;
+	using System.Threading;
+	using System.Web.Http;
+	using System.Web.OData;
+	using Data.Interfaces;
+	using Infrastructure;
+	using MeetyChat.Models;
+	using Models;
+	using Models.InputModels;
+	using UserSessionUtils;
 
-    [SessionAuthorize]
+	[SessionAuthorize]
 	public class MessagesController : BaseApiController
 	{
 		private readonly IUserIdProvider userIdProvider;
@@ -42,7 +42,8 @@
 					Content = m.Content,
 					Date = m.Date,
 					SenderName = m.Sender.Name,
-					RoomId = roomId
+					RoomId = roomId,
+                    SenderProfilePicture = m.Sender.ProfileImage
 				})
 				.OrderByDescending(m => m.Date);
 			
@@ -122,6 +123,7 @@
 					.Where(m => m.Date > date)
 					.Select(m => new MessageOutputModel()
 					{
+                        SenderProfilePicture = m.Sender.ProfileImage,
 						Date = m.Date,
 						SenderName = m.Sender.Name,
 						Id = m.Id,

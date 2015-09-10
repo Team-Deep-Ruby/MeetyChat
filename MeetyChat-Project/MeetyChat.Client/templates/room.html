@@ -23,7 +23,8 @@
                         <img ng-mouseover="show = true;" ng-mouseleave="show = false;" class="profileImage"
                              ng-src="{{message.SenderProfilePicture || 'resources/defaultProfileImg.png'}}"/>
                         {{message.SenderName}}:
-                        <img class="sentImage" ng-if="message.Content.startsWith('data:image')" ng-src="{{message.Content}}"/>
+                        <img class="sentImage" ng-if="message.Content.startsWith('data:image')"
+                             ng-src="{{message.Content}}"/>
                         <span ng-if="!message.Content.startsWith('data:image')" class="mssg">{{message.Content}}</span>
                         <span ng-show="show">- {{dateFromNow(message.Date)}}</span>
                     </div>
@@ -35,7 +36,7 @@
                 <input class="form-control" id="messageContent" placeholder="Write a reply..."
                        ng-model="messageContent.Content" minlength="2" required/>
             </form>
-            <input type="file" onchange="angular.element(this).scope().sendPicture(this)" />
+            <input type="file" onchange="angular.element(this).scope().sendPicture(this)"/>
         </div>
     </div>
 </div>

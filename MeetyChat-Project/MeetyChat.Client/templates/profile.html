@@ -3,7 +3,8 @@
         <fieldset ng-init="getDataAboutMe()">
             <legend>Edit Profile</legend>
             <div>
-                <img class="avatar" id="profileImgPreview" ng-src="{{userData.ProfileImage || 'resources/defaultProfileImg.png'}}">
+                <img class="avatar" id="profileImgPreview"
+                     ng-src="{{userData.ProfileImage || 'resources/defaultProfileImg.png'}}">
             </div>
             <input class="upload" type="file" name="upload" onchange="angular.element(this).scope().uploadImage(this)">
             <br/>
@@ -29,9 +30,12 @@
             </div>
             <br/>
 
-            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" ng-disabled="editProfile.$invalid">Edit Profile</button>
+            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"
+                    ng-disabled="editProfile.$invalid">Edit Profile
+            </button>
             <a href="#/">
-                <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Cancel</button>
+                <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Cancel
+                </button>
             </a>
 
         </fieldset>

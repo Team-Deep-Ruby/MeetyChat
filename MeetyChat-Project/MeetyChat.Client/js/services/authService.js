@@ -25,10 +25,11 @@ meetyChatApp.factory('authService',
                 delete $http.defaults.headers.common.Authorization;
             },
 
-            isLogged : function () {
+            isLogged: function () {
                 if (!this.isLoggedIn()) {
                     $location.path('/');
                     Notification.info("Please log in.");
                 }
             }
-    }});
+        }
+    });

@@ -8,8 +8,7 @@ var meetyChatApp = angular
     .config(function ($routeProvider, cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeBar = false;
         $routeProvider
-            .when('/', {
-            })
+            .when('/', {})
             .when('/login', {
                 templateUrl: 'templates/login.html',
                 controller: 'LoginController',
@@ -27,7 +26,7 @@ var meetyChatApp = angular
             .when('/profile', {
                 templateUrl: 'templates/profile.html',
                 controller: 'ProfileController',
-                resolve : {
+                resolve: {
                     isLogged: function (authService) {
                         authService.isLogged();
                     }
@@ -36,7 +35,7 @@ var meetyChatApp = angular
             .when('/profile/changepassword', {
                 templateUrl: 'templates/change-password.html',
                 controller: 'ProfileController',
-                resolve : {
+                resolve: {
                     isLogged: function (authService) {
                         authService.isLogged();
                     }
@@ -45,7 +44,7 @@ var meetyChatApp = angular
             .when('/rooms', {
                 templateUrl: 'templates/roomsList.html',
                 controller: 'RoomsController',
-                resolve : {
+                resolve: {
                     isLogged: function (authService) {
                         authService.isLogged();
                     },
@@ -59,7 +58,7 @@ var meetyChatApp = angular
             .when('/rooms/:id', {
                 templateUrl: 'templates/room.html',
                 controller: 'RoomsController',
-                resolve : {
+                resolve: {
                     isLogged: function (authService) {
                         authService.isLogged();
                     }
@@ -68,7 +67,7 @@ var meetyChatApp = angular
             .when('/privateRooms/:id', {
                 templateUrl: 'templates/privateRoom.html',
                 controller: 'RoomsController',
-                resolve : {
+                resolve: {
                     isLogged: function (authService) {
                         authService.isLogged();
                     }

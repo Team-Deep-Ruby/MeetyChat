@@ -15,4 +15,5 @@ meetyChatApp.factory('registerService',
 
                 return deferred.promise;
             }
-        }});
+        }
+    });

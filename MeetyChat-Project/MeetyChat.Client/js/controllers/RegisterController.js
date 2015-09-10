@@ -11,7 +11,7 @@ meetyChatApp.controller('RegisterController',
                     $location.path('/rooms');
                 }, function (error) {
                     console.log(error);
-                    if (error.Message != 'The request is invalid.'){
+                    if (error.Message != 'The request is invalid.') {
                         Notification.error(error.Message);
                     } else {
                         var errorMsg = error.ModelState[Object.keys(error.ModelState)[0]][0];

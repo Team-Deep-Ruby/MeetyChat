@@ -6,17 +6,19 @@
             </legend>
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
-                <input placeholder="Username" class="form-control" id="log-username" type="text" ng-model="userData.username" required aria-describedby="basic-addon1"/>
-                <!--<label class="mdl-textfield__label" for="log-username">Username</label>-->
+                <input placeholder="Username" class="form-control" id="log-username" type="text"
+                       ng-model="userData.username" required aria-describedby="basic-addon1"/>
             </div>
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-lock"></span></span>
-                <input placeholder="Password" class="form-control" id="log-pass" type="password" ng-model="userData.password" ng-minlength="6" required aria-describedby="basic-addon1"/>
-                <!--<label for="log-pass">Password</label>-->
+                <input placeholder="Password" class="form-control" id="log-pass" type="password"
+                       ng-model="userData.password" ng-minlength="6" required aria-describedby="basic-addon1"/>
             </div>
             <br/>
 
-            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" ng-disabled="loginForm.$invalid">Login</button>
+            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"
+                    ng-disabled="loginForm.$invalid">Login
+            </button>
 
         </fieldset>
     </form>

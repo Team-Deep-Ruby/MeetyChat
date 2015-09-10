@@ -120,7 +120,7 @@ meetyChatApp.factory('roomsService',
                 return deferred.promise;
             },
 
-            deleteRoom : function (room) {
+            deleteRoom: function (room) {
                 var url = BASE_URL + '/publicRooms/' + room.Id;
 
                 var deferred = $q.defer();
@@ -179,4 +179,5 @@ meetyChatApp.factory('roomsService',
 
                 return deferred.promise;
             }
-        }});
+        }
+    });

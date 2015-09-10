@@ -8,40 +8,37 @@
 
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
-                <input placeholder="Username" class="form-control" id="log-username" type="text" ng-model="userData.username" required aria-describedby="basic-addon1"/>
+                <input placeholder="Username" class="form-control" id="log-username" type="text"
+                       ng-model="userData.username" required aria-describedby="basic-addon1"/>
             </div>
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-lock"></span></span>
-                <input placeholder="Password" class="form-control" id="log-pass" type="password" ng-model="userData.password" ng-minlength="6" required aria-describedby="basic-addon1"/>
+                <input placeholder="Password" class="form-control" id="log-pass" type="password"
+                       ng-model="userData.password" ng-minlength="6" required aria-describedby="basic-addon1"/>
             </div>
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-lock"></span></span>
-                <input placeholder="Confirm Password" class="form-control" id="confirm-reg-pass" type="password" ng-model="userData.confirmPassword" compare-to="userData.password" required/>
+                <input placeholder="Confirm Password" class="form-control" id="confirm-reg-pass" type="password"
+                       ng-model="userData.confirmPassword" compare-to="userData.password" required/>
             </div>
             <div class="input-group">
-                <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-envelope"></span></span>
-                <input class="form-control" id="email" type="email" ng-model="userData.email" placeholder="example@yahoo.com" required/>
+                <span class="input-group-addon" id="basic-addon1"><span
+                        class="glyphicon glyphicon-envelope"></span></span>
+                <input class="form-control" id="email" type="email" ng-model="userData.email"
+                       placeholder="example@yahoo.com" required/>
             </div>
-            <div class="input-group">
+            <div>
                 <label>Gender</label>
                 <br/>
-
-                <div class="inline">
-                    <label for="male">Male</label>
-                    <input type="radio" ng-model="userData.gender" id="male" name="gender" ng-value="1" required/>
-                </div>
-                <div class="inline">
-                    <label for="female">Female</label>
-                    <input type="radio" ng-model="userData.gender" id="female" name="gender" ng-value="2" required/>
-                </div>
-                <div class="inline">
-                    <label for="other">Other</label>
-                    <input type="radio" ng-model="userData.gender" id="other" name="gender" ng-value="3" required/>
-                </div>
+                <input type="radio" name="gender" ng-model="userData.Gender" ng-value="1"/> Male
+                <input type="radio" name="gender" ng-model="userData.Gender" ng-value="2"/> Female
+                <input type="radio" name="gender" ng-model="userData.Gender" ng-value="3"/> Other
             </div>
             <br/>
 
-            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" ng-disabled="registerForm.$invalid">Register</button>
+            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"
+                    ng-disabled="registerForm.$invalid">Register
+            </button>
 
         </fieldset>
     </form>

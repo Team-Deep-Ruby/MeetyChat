@@ -35,7 +35,7 @@ meetyChatApp.controller('MessageController',
                     } else {
                         $scope.hasMoreMessages = false;
                     }
-                }, function (error){
+                }, function (error) {
                     Notification.error(error.Message);
                 }
             );
@@ -45,7 +45,7 @@ meetyChatApp.controller('MessageController',
             messageService.getLatestMessages($route.current.params.id)
                 .then(function (data) {
                     $timeout(function () {
-                            $scope.getLatestMessages();
+                        $scope.getLatestMessages();
                     }, 1);
                     if (data) {
                         if ($scope.messages) {
@@ -61,7 +61,7 @@ meetyChatApp.controller('MessageController',
         };
 
         $scope.sendMessage = function (messageContent) {
-             messageService.sendMessage($routeParams.id, messageContent)
+            messageService.sendMessage($routeParams.id, messageContent)
                 .then(function () {
                     $('#messageContent').val('');
                     Notification.success('Message successfully sent.');
@@ -69,7 +69,7 @@ meetyChatApp.controller('MessageController',
                     $('#messageContent').val('');
                     Notification.error(error.message);
                 }
-             )
+            )
         };
 
         $scope.dateFromNow = function (date) {

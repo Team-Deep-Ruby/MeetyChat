@@ -8,7 +8,7 @@ meetyChatApp.controller('RoomsController',
                 .then(function (data) {
                     $scope.roomsList = data;
                     $timeout(function () {
-                        if ($route.current.$$route.originalPath == '/rooms'){
+                        if ($route.current.$$route.originalPath == '/rooms') {
                             $scope.getRooms();
                             //$scope.getPrivateRooms();
                         }
@@ -28,7 +28,7 @@ meetyChatApp.controller('RoomsController',
                     });
                     $scope.privateRoomsList = privateRoomsList;
                     $timeout(function () {
-                        if ($route.current.$$route.originalPath == '/rooms'){
+                        if ($route.current.$$route.originalPath == '/rooms') {
                             $scope.getPrivateRooms();
                         }
                     }, 20000);
@@ -42,7 +42,7 @@ meetyChatApp.controller('RoomsController',
                 .then(function (data) {
                     $scope.room = data;
                     $timeout(function () {
-                        if ($route.current.$$route.originalPath == '/rooms/:id'){
+                        if ($route.current.$$route.originalPath == '/rooms/:id') {
                             $scope.getRoomById()
                         }
                     }, 20000);
@@ -57,7 +57,7 @@ meetyChatApp.controller('RoomsController',
                 .then(function (data) {
                     $scope.username = getPrivateRoomName(data);
                     $timeout(function () {
-                        if ($route.current.$$route.originalPath == '/privateRooms/:id'){
+                        if ($route.current.$$route.originalPath == '/privateRooms/:id') {
                             $scope.getPrivateRoomById()
                         }
                     }, 20000);
@@ -148,7 +148,7 @@ meetyChatApp.controller('RoomsController',
                         $scope.room.MembersCount--;
                         var i = $scope.room.Members.length;
                         while (i--) {
-                            if ($scope.room.Members[i].Name === data[0].Username){
+                            if ($scope.room.Members[i].Name === data[0].Username) {
                                 $scope.room.Members.splice(i);
                                 break;
                             }

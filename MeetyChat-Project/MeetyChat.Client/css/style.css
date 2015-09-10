@@ -61,7 +61,7 @@ a:hover {
 }
 
 li {
-    list-style:none;
+    list-style: none;
 }
 
 .message {
@@ -126,4 +126,9 @@ li {
 
 .mssg {
     color: red;
+}
+
+.chats {
+    overflow: auto;
+    height: 350px;
 }

@@ -4,7 +4,7 @@ meetyChatApp.controller('LogoutController',
     function LogoutController($scope, $location, authService, logoutService, Notification, roomsService, $routeParams) {
 
         $scope.logout = function () {
-            if ($routeParams.id){
+            if ($routeParams.id) {
                 roomsService.leaveRoom($routeParams.id)
             }
 

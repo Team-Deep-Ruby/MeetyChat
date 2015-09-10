@@ -54,4 +54,5 @@ meetyChatApp.factory('messageService',
                     });
                 return deferred.promise;
             }
-        }});
+        }
+    });

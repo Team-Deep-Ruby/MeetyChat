@@ -6,10 +6,8 @@
     using Data.Interfaces;
     using Infrastructure;
     using MeetyChat.Models;
-    using Microsoft.Ajax.Utilities;
     using Models;
     using Models.Rooms;
-    using Ninject.Web.WebApi;
     using UserSessionUtils;
 
     [SessionAuthorize]

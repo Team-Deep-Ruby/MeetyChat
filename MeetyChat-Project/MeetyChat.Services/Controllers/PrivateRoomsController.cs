@@ -6,9 +6,8 @@
     using Data.Interfaces;
     using Infrastructure;
     using MeetyChat.Models;
-    using Models;
+    using Microsoft.AspNet.Identity;
     using Models.Rooms;
-    using Ninject.Web.WebApi;
     using UserSessionUtils;
 
     [SessionAuthorize]
@@ -26,8 +25,10 @@
         [Route("api/privateRooms")]
         public IHttpActionResult GetPrivateRooms()
         {
+            var userId = this.User.Identity.GetUserId();
+
             var currentUserId = this.data.Users.All()
-                .First(u => u.Name == this.User.Identity.Name)
+                .First(u => u.Id == userId)
                 .Id;
 
             var rooms = this.data.PrivateRooms.All()
@@ -84,12 +85,12 @@
                 return this.JoinPrivateRoom(privateRoomFromDb.Id);
             }
 
-            var firstUser = this.data.Users.All().First(u => u.Name == model.FirstUsername);
-            var secondUser = this.data.Users.All().First(u => u.Name == model.SecondUsername);
+            var firstUser = this.data.Users.All().First(u => u.UserName == model.FirstUsername);
+            var secondUser = this.data.Users.All().First(u => u.UserName == model.SecondUsername);
 
             var room = new PrivateRoom
             {
-                Name = firstUser.Name + " " + secondUser.Name,
+                Name = firstUser.UserName + " " + secondUser.UserName,
                 FirstUserId = firstUser.Id,
                 SecondUserId = secondUser.Id
             };

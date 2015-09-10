@@ -19,18 +19,14 @@
     {
         private readonly ApplicationUserManager userManager;
         private readonly IUserIdProvider provider;
-
-        public ProfileController()
-        {
-            this.userManager = new ApplicationUserManager(
-                new UserStore<ApplicationUser>(new MeetyChatDbContext()));
-        }
-
+        
         public ProfileController(IMeetyChatData data, 
             IUserIdProvider provider) 
             : base(data)
         {
             this.provider = provider;
+            this.userManager = new ApplicationUserManager(
+                new UserStore<ApplicationUser>(new MeetyChatDbContext()));
         }
 
         public ApplicationUserManager UserManager
@@ -115,9 +111,9 @@
             {
                 return this.BadRequest(this.ModelState);
             }
-
+            
             var result = await this.UserManager.ChangePasswordAsync(
-                this.User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+                this.provider.GetUserId(), model.OldPassword, model.NewPassword);
 
             if (!result.Succeeded)
             {

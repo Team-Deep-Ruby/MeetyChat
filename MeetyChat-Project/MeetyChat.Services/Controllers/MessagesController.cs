@@ -1,17 +1,18 @@
 ﻿namespace MeetyChat.Services.Controllers
 {
-	using System;
-	using System.Linq;
-	using System.Threading;
-	using System.Web.Http;
-	using System.Web.OData;
-	using Data.Interfaces;
-	using Infrastructure;
-	using MeetyChat.Models;
-	using Models;
-	using Models.InputModels;
-	using Models.Rooms;
+    using System;
+    using System.Linq;
+    using System.Threading;
+    using System.Web.Http;
+    using System.Web.OData;
+    using Data.Interfaces;
+    using Infrastructure;
+    using MeetyChat.Models;
+    using Models;
+    using Models.InputModels;
+    using UserSessionUtils;
 
+    [SessionAuthorize]
 	public class MessagesController : BaseApiController
 	{
 		private readonly IUserIdProvider userIdProvider;

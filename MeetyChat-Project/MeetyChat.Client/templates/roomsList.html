@@ -3,12 +3,12 @@
         <input type="text" class="form-control" id="room.Name" ng-model="room.Name" placeholder="Enter room name" required style="width: 20%; display: inline-block"/>
         <button id="addRoomButton" class="btn btn-default" type="submit" ng-disabled="addRoomForm.$invalid">Add Room</button>
     </form>
+    <h5>Public Chats</h5>
     <ul>
         <li ng-repeat="room in roomsList">
             <button type="button" class="btn btn-default" ng-click="joinRoom(room)">
                 {{room.Name}} - {{room.MembersCount}} Members
             </button>
-            <button class="btn btn-danger" ng-click="deleteRoom(room)">Delete Room</button>
         </li>
     </ul>
 </div>
@@ -29,7 +29,7 @@
     <h5>Online Users</h5>
     <ul>
         <li ng-repeat="user in onlineUsers">
-            <a href="" ng-click="addPrivateRoom(user.Name)">
+            <a href="" ng-click="addPrivateRoom(user.UserName)">
                 {{user.Name}}
             </a>
         </li>

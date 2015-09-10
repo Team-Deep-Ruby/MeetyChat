@@ -39,17 +39,22 @@ meetyChatApp.controller('ProfileController',
             }
         };
 
-        $scope.profilePicture = function (fileInputField) {
+        $scope.uploadImage = function (fileInputField) {
+            var sizeLimit = 128000;
+
             var file = fileInputField.files[0];
-            if (file.type.match(/image\/.*/)) {
+            if (file && file.type.match(/image\/.*/) && file.size < sizeLimit) {
                 var reader = new FileReader();
                 reader.onload = function () {
-                    $scope.userData.profileImage = reader.result;
-                    $("#uploadProfileImg").attr('src', reader.result);
+                    $('#profileImgPreview').attr('src', reader.result);
+                    $scope.userData.NewProfileImage = reader.result;
                 };
                 reader.readAsDataURL(file);
-            } else {
-                $(".image-box").html("<p>File type not supported!</p>");
+            } else if (file) {
+                $('#profileImgPreview').attr('src', $scope.userData.ProfileImage);
+                fileInputField.value = "";
+                file.size > sizeLimit ? Notification.info('Profile picture size limit is 128kb.') :
+                    Notification.info('File not supported!');
             }
         };
     }

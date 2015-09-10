@@ -1,11 +1,12 @@
 'use strict';
 
 var meetyChatApp = angular
-    .module('meetyChatApp', ['ngRoute', 'ui-notification'])
+    .module('meetyChatApp', ['ngRoute', 'ui-notification', 'angular-loading-bar', 'angularMoment'])
     .constant({
-        'BASE_URL': 'http://localhost:33257/api'
+        'BASE_URL': 'http://meetychat.cloudapp.net/api'
     })
-    .config(function ($routeProvider) {
+    .config(function ($routeProvider, cfpLoadingBarProvider) {
+        cfpLoadingBarProvider.includeBar = false;
         $routeProvider
             .when('/', {
             })

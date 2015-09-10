@@ -20,9 +20,11 @@
 
         <ul>
             <li class="message" ng-repeat="message in messages">
-                <div>{{message.SenderName}} -
-                    {{message.Content}}</div>
-                <!--{{message.Date}}-->
+                <div>
+                    {{message.SenderName}} -
+                    {{message.Content}} -
+                    {{dateFromNow(message.Date)}}
+                </div>
             </li>
         </ul>
 

@@ -5,7 +5,9 @@ meetyChatApp.factory('usersService',
         return {
             getOnlineUsers: function () {
                 var deferred = $q.defer();
-                $http.get(BASE_URL + '/users/active')
+                $http.get(BASE_URL + '/users/active', {
+                    ignoreLoadingBar: true
+                })
                     .success(function (data) {
                         deferred.resolve(data)
                     })

@@ -40,7 +40,9 @@ meetyChatApp.controller('MessageController',
         $scope.getLatestMessages = function () {
             messageService.getLatestMessages($route.current.params.id)
                 .then(function (data) {
-                    $timeout($scope.getLatestMessages, 1);
+                    $timeout(function () {
+                            $scope.getLatestMessages();
+                    }, 1);
                     if (data) {
                         if ($scope.messages) {
                             $scope.messages.push(data[0]);
@@ -62,5 +64,9 @@ meetyChatApp.controller('MessageController',
                     $('#messageContent').val('');
                     Notification.error(error.message);
                 })
+        };
+
+        $scope.dateFromNow = function (date) {
+            return moment(date).add(3, 'hours').fromNow();
         };
     });

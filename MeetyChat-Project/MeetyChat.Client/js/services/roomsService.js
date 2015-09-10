@@ -8,7 +8,9 @@ meetyChatApp.factory('roomsService',
 
             getAllRooms: function () {
                 var deferred = $q.defer();
-                $http.get(BASE_URL + '/publicRooms')
+                $http.get(BASE_URL + '/publicRooms', {
+                    ignoreLoadingBar: true
+                })
                     .success(function (data) {
                         deferred.resolve(data);
                     })
@@ -20,7 +22,9 @@ meetyChatApp.factory('roomsService',
 
             getPrivateRooms: function () {
                 var deferred = $q.defer();
-                $http.get(BASE_URL + '/privateRooms')
+                $http.get(BASE_URL + '/privateRooms', {
+                    ignoreLoadingBar: true
+                })
                     .success(function (data) {
                         deferred.resolve(data);
                     })
@@ -32,7 +36,9 @@ meetyChatApp.factory('roomsService',
 
             getRoomById: function (id) {
                 var deferred = $q.defer();
-                $http.get(BASE_URL + '/publicRooms/' + id)
+                $http.get(BASE_URL + '/publicRooms/' + id, {
+                    ignoreLoadingBar: true
+                })
                     .success(function (data) {
                         deferred.resolve(data);
                     })
@@ -44,7 +50,9 @@ meetyChatApp.factory('roomsService',
 
             getPrivateRoomById: function (id) {
                 var deferred = $q.defer();
-                $http.get(BASE_URL + '/privateRooms/' + id)
+                $http.get(BASE_URL + '/privateRooms/' + id, {
+                    ignoreLoadingBar: true
+                })
                     .success(function (data) {
                         deferred.resolve(data);
                     })

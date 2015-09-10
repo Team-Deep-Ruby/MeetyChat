@@ -29,7 +29,9 @@ meetyChatApp.factory('messageService',
 
             getLatestMessages: function (id) {
                 var deferred = $q.defer();
-                $http.get(BASE_URL + '/rooms/' + id + "/messages/latest")
+                $http.get(BASE_URL + '/rooms/' + id + "/messages/latest", {
+                    ignoreLoadingBar: true
+                })
                     .success(function (data) {
                         deferred.resolve(data);
                     })

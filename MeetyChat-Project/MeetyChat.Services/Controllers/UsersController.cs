@@ -21,7 +21,8 @@
                 .Select(us => new
                 {
                     us.OwnerUser.UserName,
-                    us.OwnerUser.Name
+                    us.OwnerUser.Name,
+                    us.OwnerUser.ProfileImage
                 });
 
             return this.Ok(activeUsers);

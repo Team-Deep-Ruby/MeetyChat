@@ -4,6 +4,8 @@
     <ul>
         <li ng-repeat="member in room.Members">
             <a href="" ng-click="addPrivateRoom(member.Name)">
+                <img class="profileImage" alt=""
+                     ng-src="{{member.ProfileImage || 'resources/defaultProfileImg.png'}}"/>
                 {{member.Name}}
             </a>
         </li>
@@ -21,7 +23,8 @@
         <ul>
             <li class="message" ng-repeat="message in messages">
                 <div>
-                    <img ng-mouseover="show = true;" ng-mouseleave="show = false;" class="profileImage" alt="" ng-src="{{message.SenderProfilePicture || 'resources/defaultProfileImg.png'}}"/>
+                    <img ng-mouseover="show = true;" ng-mouseleave="show = false;" class="profileImage" alt=""
+                         ng-src="{{message.SenderProfilePicture || 'resources/defaultProfileImg.png'}}"/>
                     {{message.SenderName}} -
                     <img class="sentImage" ng-if="message.Content.startsWith('data:image')" ng-src="{{message.Content}}" alt="asd"/>
                     <span ng-if="!message.Content.startsWith('data:image')">{{message.Content}}</span>

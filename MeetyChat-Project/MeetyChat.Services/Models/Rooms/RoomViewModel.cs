@@ -31,7 +31,7 @@
                         .Select(m => new MembersViewModel
                     {
                         Name = m.Name,
-                        Gender = m.Gender
+                        Gender = m.Gender,
                     })
                 };
             }

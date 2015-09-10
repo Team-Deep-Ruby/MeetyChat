@@ -30,6 +30,8 @@
     <ul>
         <li ng-repeat="user in onlineUsers">
             <a href="" ng-click="addPrivateRoom(user.UserName)">
+                <img class="profileImage" alt=""
+                     ng-src="{{message.ProfileImage || 'resources/defaultProfileImg.png'}}"/>
                 {{user.Name}}
             </a>
         </li>

@@ -15,9 +15,11 @@
         <ul>
             <li class="message" ng-repeat="message in messages">
                 <div>
-                    {{message.SenderName}} -
-                    {{message.Content}} -
-                    {{dateFromNow(message.Date)}}
+                    <img ng-mouseover="show = true;" ng-mouseleave="show = false;" class="profileImage" alt=""
+                         ng-src="{{message.SenderProfilePicture || 'resources/defaultProfileImg.png'}}"/>
+                    <img class="sentImage" ng-if="message.Content.startsWith('data:image')" ng-src="{{message.Content}}" alt=""/>
+                    <span ng-if="!message.Content.startsWith('data:image')">{{message.Content}}</span>
+                    <span ng-show="show">{{message.SenderName}} - {{dateFromNow(message.Date)}}</span>
                 </div>
             </li>
         </ul>
@@ -26,5 +28,6 @@
             <input class="form-control" id="messageContent" placeholder="Write a reply..."
                    ng-model="messageContent.Content" minlength="2" required/>
         </form>
+        <input type="file" onchange="angular.element(this).scope().sendPicture(this)" />
     </div>
 </div>

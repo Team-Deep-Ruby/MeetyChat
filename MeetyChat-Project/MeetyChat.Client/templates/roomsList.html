@@ -1,39 +1,44 @@
-<div ng-init="getRooms()">
-    <form name="addRoomForm" ng-submit="addRoom(room.Name)" style="padding: 20px">
-        <input type="text" class="form-control" id="room.Name" ng-model="room.Name" placeholder="Enter room name" required style="width: 20%; display: inline-block"/>
-        <button id="addRoomButton" class="btn btn-default" type="submit" ng-disabled="addRoomForm.$invalid">Add Room</button>
-    </form>
-    <h5>Public Chats</h5>
-    <ul>
-        <li ng-repeat="room in roomsList">
-            <button type="button" class="btn btn-default" ng-click="joinRoom(room)">
-                {{room.Name}} - {{room.MembersCount}} Members
-            </button>
-        </li>
-    </ul>
-</div>
+<div class="center">
+    <div ng-init="getRooms()" class="panel panel-default mid">
+        <div class="panel-heading">Public Chats</div>
+        <div class="panel-body">
+            <li ng-repeat="room in roomsList">
+                <button type="button" class="btn btn-primary roomBtn" ng-click="joinRoom(room)">{{room.Name}} <span class="badge">{{room.MembersCount}}</span>
+                </button>
+            </li>
+        </div>
+    </div>
 
-<div ng-init="getPrivateRooms()">
-    <h5>Private Chats</h5>
-    <ul>
-        <li ng-repeat="room in privateRoomsList">
-            <a href="#/privateRooms/{{room.Id}}">
-                {{room.Name}}
-            </a>
-        </li>
-    </ul>
-</div>
+    <div ng-init="getPrivateRooms()" class="panel panel-default mid">
+        <div class="panel-heading">Private Chats</div>
+        <div class="panel-body">
+            <li ng-repeat="room in privateRoomsList">
+                <a href="#/privateRooms/{{room.Id}}">
+                    <button class="btn btn-primary room">{{room.Name}}</button>
+                </a>
+            </li>
+        </div>
+    </div>
 
 
-<div ng-controller="UsersController" ng-init="getOnlineUsers()">
-    <h5>Online Users</h5>
-    <ul>
-        <li ng-repeat="user in onlineUsers">
-            <a href="" ng-click="addPrivateRoom(user.UserName)">
-                <img class="profileImage" alt=""
-                     ng-src="{{message.ProfileImage || 'resources/defaultProfileImg.png'}}"/>
-                {{user.Name}}
-            </a>
-        </li>
-    </ul>
+    <div ng-controller="UsersController" ng-init="getOnlineUsers()" class="panel panel-default mid">
+        <div class="panel-heading">Online Users</div>
+        <div class="panel-body">
+            <li ng-repeat="user in onlineUsers">
+                <a href="" ng-click="addPrivateRoom(user.UserName)">
+                    <img class="profileImage" alt=""
+                         ng-src="{{message.ProfileImage || 'resources/defaultProfileImg.png'}}"/>
+                    {{user.Name}}
+                </a>
+            </li>
+        </div>
+    </div>
+
+    <div class="mid top">
+        <form name="addRoomForm" ng-submit="addRoom(room.Name)">
+            <input type="text" class="form-control side" id="room.Name" ng-model="room.Name" placeholder="Enter room name" required/>
+            <button id="addRoomButton" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent roomBtn" type="submit" ng-disabled="addRoomForm.$invalid">Add Room</button>
+        </form>
+    </div>
 </div>
+

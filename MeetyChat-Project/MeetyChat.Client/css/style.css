@@ -1,3 +1,7 @@
+body {
+    background-color: #e8e9ec;
+}
+
 a {
     color: black;
 }
@@ -48,8 +52,7 @@ a:hover {
 }
 
 .profileImage {
-    max-width: 50px;
-    max-height: 50px;
+    width: 34px;
 }
 
 li {
@@ -62,4 +65,19 @@ li {
 
 .upload {
     margin: 0 75px;
+}
+
+.mid {
+    width: 175px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+}
+
+.top {
+    vertical-align: top;
+}
+
+.roomBtn {
+    margin-top: 5px;
 }

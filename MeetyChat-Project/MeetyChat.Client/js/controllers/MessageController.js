@@ -3,6 +3,8 @@
 meetyChatApp.controller('MessageController',
     function MessageController($scope, $http, $route, $location, messageService, $routeParams, Notification, $timeout) {
 
+        $scope.glued = true;
+
         $scope.getAllMessages = function () {
             messageService.getAllMessages($routeParams.id)
                 .then(function (data) {
@@ -10,7 +12,8 @@ meetyChatApp.controller('MessageController',
                     $scope.messages = data.reverse();
                 }, function (error) {
                     Notification.error(error.Message);
-                })
+                }
+            )
         };
 
         var skip = 0;
@@ -34,7 +37,8 @@ meetyChatApp.controller('MessageController',
                     }
                 }, function (error){
                     Notification.error(error.Message);
-                });
+                }
+            );
         };
 
         $scope.getLatestMessages = function () {
@@ -52,7 +56,8 @@ meetyChatApp.controller('MessageController',
                     }
                 }, function (error) {
                     Notification.error(error.Message);
-                });
+                }
+            );
         };
 
         $scope.sendMessage = function (messageContent) {
@@ -63,7 +68,8 @@ meetyChatApp.controller('MessageController',
                 }, function (error) {
                     $('#messageContent').val('');
                     Notification.error(error.message);
-                })
+                }
+             )
         };
 
         $scope.dateFromNow = function (date) {
@@ -89,7 +95,8 @@ meetyChatApp.controller('MessageController',
                             Notification.success('Picture successfully sent.');
                         }, function (error) {
                             Notification.error(error.message);
-                        })
+                        }
+                    )
                 };
                 reader.readAsDataURL(file);
             } else {
@@ -98,4 +105,5 @@ meetyChatApp.controller('MessageController',
             }
             fileInputField.value = "";
         };
-    });
+    }
+);

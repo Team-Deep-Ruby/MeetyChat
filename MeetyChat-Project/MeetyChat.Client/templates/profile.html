@@ -3,8 +3,7 @@
         <fieldset ng-init="getDataAboutMe()">
             <legend>Edit Profile</legend>
             <div>
-                <img id="profileImgPreview" ng-src="{{userData.ProfileImage || 'resources/defaultProfileImg.png'}}"
-                     style="width: 150px; height: 150px">
+                <img class="avatar" id="profileImgPreview" ng-src="{{userData.ProfileImage || 'resources/defaultProfileImg.png'}}">
             </div>
             <input class="upload" type="file" name="upload" onchange="angular.element(this).scope().uploadImage(this)">
             <br/>
@@ -13,11 +12,6 @@
                 <label for="name">Name</label>
                 <input class="mdl-textfield__input" type="text" id="name" ng-model="userData.Name" required/>
             </div>
-
-            <!--<div class="mdl-textfield mdl-js-textfield">-->
-                <!--<label for="name">Name:</label>-->
-                <!--<input type="text" class="form-control input1" id="name" ng-model="userData.Name" required/>-->
-            <!--</div>-->
 
             <div class="mdl-textfield mdl-js-textfield">
                 <label for="email">Email</label>

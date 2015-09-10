@@ -1,7 +1,7 @@
 'use strict';
 
 var meetyChatApp = angular
-    .module('meetyChatApp', ['ngRoute', 'ui-notification', 'angular-loading-bar', 'angularMoment'])
+    .module('meetyChatApp', ['ngRoute', 'ui-notification', 'angular-loading-bar', 'angularMoment', 'luegg.directives'])
     .constant({
         'BASE_URL': 'http://localhost:33257/api'
     })
